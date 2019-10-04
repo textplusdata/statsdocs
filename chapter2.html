@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Chapter 2</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">My Website</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Contents
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Stats Data and Models</li>
+    <li>
+      <a href="chapter1.html">Chapter 1</a>
+    </li>
+    <li>
+      <a href="chapter2.html">Chapter 2</a>
+    </li>
+    <li>
+      <a href="chapter3.html">Chapter 3</a>
+    </li>
+    <li>
+      <a href="chapter4.html">Chapter 4</a>
+    </li>
+    <li>
+      <a href="chapter5.html">Chapter 5</a>
+    </li>
+    <li>
+      <a href="chapter6.html">Chapter 6</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Notes about using R</li>
+    <li>
+      <a href="using-rmarkdown.html">Using R Markdown</a>
+    </li>
+    <li>
+      <a href="other-notes.html">Other notes</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Chapter 2</h1>
+
+</div>
+
+
+<div id="data-presentation" class="section level1">
+<h1>Data presentation</h1>
+<div id="frequency-table" class="section level2">
+<h2>frequency table</h2>
+<p>A summary of rows by category. Normally a count “how frequent does this category type show up in the data?”</p>
+</div>
+<div id="relative-frequency-table" class="section level2">
+<h2>relative frequency table</h2>
+<p>Same as above but categories are calculated as a percentage of the total.</p>
+</div>
+<div id="contingency-table" class="section level2">
+<h2>contingency table</h2>
+<p>Think pivot table in Excel with rows and columns. Take two variables and compare how individuals are distributed along each variable (column) contingent on the other variable (row).</p>
+<div id="marginal-distribution-in-contingency-table" class="section level3">
+<h3>marginal distribution in contingency table</h3>
+<p>Marginal distribution is essentially the “total” column /row for each of the variables. Marginal distribution can be in counts or percentages.</p>
+</div>
+<div id="conditional-distribution" class="section level3">
+<h3>conditional distribution</h3>
+<p>This is distribution of one variable that <em>only</em> satisfy a condition on another variable e.g. distribution of titanic passengers by class that died vs. same distribution for those that survived.</p>
+</div>
+</div>
+</div>
+<div id="analysis" class="section level1">
+<h1>Analysis</h1>
+</div>
+<div id="dependence-independence" class="section level1">
+<h1>dependence / independence</h1>
+<p>If there is no difference in conditional distribution of a variable for different categories in another variable then we can say that the variables are independent of each other.</p>
+<p>This is only a very simplified approach to statistical analysis, more will come later.</p>
+</div>
+<div id="simpsons-paradox" class="section level1">
+<h1>Simpson’s paradox</h1>
+<p>When looking at the overall result can get what appears to be contradictory results when looking at group results. So, overall, one student has a worse average than another student but if you look at the breakdown by test type, one student takes a lot of hard tests (and scores 70% right against the other student getting only 50% right, but takes less hard tests) while the same student scores higher on the easy tests (90% versus only 85% by the other student), because the other student takes mostly easy tests, their overall average is higher.</p>
+<div id="notes-on-exercises-for-chapter-2" class="section level2">
+<h2>Notes on exercises for Chapter 2</h2>
+<div id="exercise-15" class="section level3">
+<h3>Exercise 15</h3>
+<p>First of all, create the data frame and add percentage calculation</p>
+<pre class="r"><code>ex15data &lt;- data.frame(Status = c(&quot;Accepted&quot;, &quot;Waitlisted&quot;, &quot;Turned away&quot;), Number = c(931, 298, 526))
+ex15data$AppPercent = round((ex15data$Number / sum(ex15data$Number))*100,0)</code></pre>
+<p>Create a bar chart</p>
+<pre class="r"><code>library(ggplot2)
+ggplot(data=ex15data, aes(x=Status, y=AppPercent)) + geom_bar(stat=&quot;identity&quot;)</code></pre>
+<p><img src="chapter2_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Create a more complicated bar chart. Note that it is possible to add explanatory text to the chart if not using something like RMarkdown (like this notebook)</p>
+<p>some instructions for extra bar chart functions: <a href="http://www.sthda.com/english/wiki/ggplot2-barplots-quick-start-guide-r-software-and-data-visualization" class="uri">http://www.sthda.com/english/wiki/ggplot2-barplots-quick-start-guide-r-software-and-data-visualization</a></p>
+<pre class="r"><code>pEx15 &lt;- ggplot(data=ex15data, aes(x=Status, y=AppPercent)) + geom_bar(stat=&quot;identity&quot;, fill=rownames(ex15data))+
+  geom_text(aes(label=paste(AppPercent, &quot;%&quot;,sep = &quot;&quot;)), vjust=1.6, color=&quot;white&quot;, size=10)+ theme_minimal()
+
+pEx15</code></pre>
+<p><img src="chapter2_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r"><code>pEx15 + labs(title = &#39;Application Status&#39;, subtitle = &quot;Over half of applicants were accepted&quot;)</code></pre>
+<p><img src="chapter2_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+</div>
+</div>
+<div id="exercise-17" class="section level2">
+<h2>Exercise 17</h2>
+<p>Create the data frame</p>
+<pre class="r"><code>ex17data &lt;- data.frame(CauseDeath = c(&quot;Heart Disease&quot;, &quot;Cancer&quot;, &quot;Lung Diseases&quot;, 
+                                       &quot;Circulatory Diseases and Stroke&quot;, &quot;Accidents&quot;, &quot;Other&quot;), Percent = c(29.3, 
+                                                                                                             22.6, 8.8, 9.8, 3.2, 26.3))</code></pre>
+<p>Note “reorder” used in this example to sort highest to lowest.</p>
+<p>The plot is first set to pEx17, and the run separately.</p>
+<pre class="r"><code>pEx17 &lt;- ggplot(data=ex17data, aes(x = reorder(CauseDeath, -Percent), y=Percent)) + geom_bar(stat=&quot;identity&quot;, fill=rownames(ex17data))+
+  geom_text(aes(label=paste(Percent, &quot;%&quot;,sep = &quot;&quot;)), vjust=1.6, color=&quot;white&quot;, size=6)+ theme_minimal() + theme(text = element_text(size = 14)) 
+
+pEx17</code></pre>
+<p><img src="chapter2_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>This way of setting the plot allows you to add extra bits of info one chunk at a time:</p>
+<pre class="r"><code>pEx17 + labs(title = &#39;Cause of Death USA 1999&#39;, subtitle = &quot;In total, around 38% of deaths were due to heart or lung disease (29.3 + 8.8 %)&quot;)</code></pre>
+<p><img src="chapter2_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Tried to find code to get the “Other” column to appear at the end but couldn’t get this to work:</p>
+<p><a href="https://stackoverflow.com/questions/31613794/r-ggplot-specific-order-of-bars" class="uri">https://stackoverflow.com/questions/31613794/r-ggplot-specific-order-of-bars</a></p>
+</div>
+<div id="exercise-28-30-page-57" class="section level2">
+<h2>Exercise 28 /30, page 57</h2>
+<p>Set the data frame</p>
+<pre class="r"><code>ex28data &lt;- data.frame(Gender = c(&quot;Female&quot;, &quot;Male&quot;), Liberal = c(35, 
+                                               50), Moderate = c(36, 44), Conservative = c(6, 21))</code></pre>
+<p>But this doesn’t give us the data in the right format, need to “unpivot” the data which is called “melt” in R or “stack”</p>
+<p><a href="https://stackoverflow.com/questions/7980030/how-to-pivot-unpivot-cast-melt-data-frame" class="uri">https://stackoverflow.com/questions/7980030/how-to-pivot-unpivot-cast-melt-data-frame</a></p>
+<pre class="r"><code>ex28stack &lt;- cbind(ex28data[1], stack(ex28data[-1]))
+summary(ex28stack)</code></pre>
+<pre><code>##     Gender      values               ind   
+##  Female:3   Min.   : 6.0   Liberal     :2  
+##  Male  :3   1st Qu.:24.5   Moderate    :2  
+##             Median :35.5   Conservative:2  
+##             Mean   :32.0                   
+##             3rd Qu.:42.0                   
+##             Max.   :50.0</code></pre>
+<p>Rename column to make it more understandable See this website: <a href="https://www.datanovia.com/en/lessons/rename-data-frame-columns-in-r/" class="uri">https://www.datanovia.com/en/lessons/rename-data-frame-columns-in-r/</a></p>
+<pre class="r"><code># get column names
+colnames(ex28stack)</code></pre>
+<pre><code>## [1] &quot;Gender&quot; &quot;values&quot; &quot;ind&quot;</code></pre>
+<pre class="r"><code># Change column number 3  -was called &quot;ind&quot;
+
+names(ex28stack)[2] &lt;- &quot;number_students&quot;
+names(ex28stack)[3] &lt;- &quot;politics&quot;
+
+#get column names again
+
+colnames(ex28stack)</code></pre>
+<pre><code>## [1] &quot;Gender&quot;          &quot;number_students&quot; &quot;politics&quot;</code></pre>
+<p>Create percentage calculation</p>
+<pre class="r"><code># calculate percentage
+
+ex28stack$percent_students = round((ex28stack$number_students / sum(ex28stack$number_students))*100,0)
+
+#get column names again to show new column created
+
+colnames(ex28stack)</code></pre>
+<pre><code>## [1] &quot;Gender&quot;           &quot;number_students&quot;  &quot;politics&quot;        
+## [4] &quot;percent_students&quot;</code></pre>
+<pre class="r"><code>summary(ex28stack)</code></pre>
+<pre><code>##     Gender  number_students         politics percent_students
+##  Female:3   Min.   : 6.0    Liberal     :2   Min.   : 3.00   
+##  Male  :3   1st Qu.:24.5    Moderate    :2   1st Qu.:12.75   
+##             Median :35.5    Conservative:2   Median :18.50   
+##             Mean   :32.0                     Mean   :16.67   
+##             3rd Qu.:42.0                     3rd Qu.:22.00   
+##             Max.   :50.0                     Max.   :26.00</code></pre>
+<p>Show as stacked bar chart after lots of over-complicated wrong turns, this site had the best summary: <a href="https://ggplot2.tidyverse.org/reference/geom_text.html" class="uri">https://ggplot2.tidyverse.org/reference/geom_text.html</a></p>
+<p>However, this doesn’t give us proportional distribution in each category Male/Female. It gives the percentage of the total for each unique combination of Gender/Politics. This isn’t quite what we want…</p>
+<p>Need to dig into Frequency tables instead…</p>
+<pre class="r"><code># must load the ggplot2 library before it can be used
+library(&quot;ggplot2&quot;)
+ggplot(data = ex28stack, aes(x = Gender, y = percent_students, group = politics)) +
+  geom_col(aes(fill = politics)) +
+  geom_text(aes(label = percent_students), position = position_stack(vjust = 0.5), size = 6) + theme(text = element_text(size = 14))</code></pre>
+<p><img src="chapter2_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<div id="frequency-tables" class="section level3">
+<h3>Frequency tables</h3>
+<p>Thought this would be straight forward, but need to identify correct library for the job.</p>
+<p>Using the table() function results in just counts, but this data set need sum.</p>
+<pre class="r"><code>table(ex28stack$Gender, ex28stack$politics)</code></pre>
+<pre><code>##         
+##          Liberal Moderate Conservative
+##   Female       1        1            1
+##   Male         1        1            1</code></pre>
+<p>Using <em>dplyr library</em> gets this result as a plain table</p>
+<pre class="r"><code>library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>group_by(ex28stack , Gender, politics) %&gt;%
+  summarise(sum = number_students)</code></pre>
+<pre><code>## # A tibble: 6 x 3
+## # Groups:   Gender [2]
+##   Gender politics       sum
+##   &lt;fct&gt;  &lt;fct&gt;        &lt;dbl&gt;
+## 1 Female Liberal         35
+## 2 Female Moderate        36
+## 3 Female Conservative     6
+## 4 Male   Liberal         50
+## 5 Male   Moderate        44
+## 6 Male   Conservative    21</code></pre>
+<p>This summary table uses the <em>reshape library</em>:</p>
+<p><a href="https://stackoverflow.com/questions/32325858/r-table-function-how-to-sum-instead-of-counting" class="uri">https://stackoverflow.com/questions/32325858/r-table-function-how-to-sum-instead-of-counting</a></p>
+<p>Or we can use dcast to convert from ‘long’ to ‘wide’ format. It is more flexible as we can specify the fun.aggregate to sum, mean, median etc.</p>
+<pre class="r"><code>library(reshape2)
+ex28table &lt;- dcast(ex28stack, Gender~politics, value.var=&#39;number_students&#39;, sum)
+ex28table</code></pre>
+<pre><code>##   Gender Liberal Moderate Conservative
+## 1 Female      35       36            6
+## 2   Male      50       44           21</code></pre>
+<p>This page on frequencies explains how to use the xtabs function <a href="https://www.statmethods.net/stats/frequencies.html" class="uri">https://www.statmethods.net/stats/frequencies.html</a> Plus here to: <a href="https://homerhanumat.github.io/tigerstats/xtabs.html" class="uri">https://homerhanumat.github.io/tigerstats/xtabs.html</a></p>
+<pre class="r"><code># Create a table by applying xtabs to dataframe
+
+ex28table2 &lt;- xtabs(number_students~Gender+politics, data=ex28stack)
+
+ftable(ex28table2) # print table</code></pre>
+<pre><code>##        politics Liberal Moderate Conservative
+## Gender                                       
+## Female               35       36            6
+## Male                 50       44           21</code></pre>
+<pre class="r"><code># add in 2 line breaks to make output clearer.
+writeLines(&quot;\n \n&quot;)</code></pre>
+<pre class="r"><code>margin.table(ex28table2, 1) # A frequencies (summed over B) i.e Gender summed over politics</code></pre>
+<pre><code>## Gender
+## Female   Male 
+##     77    115</code></pre>
+<pre class="r"><code>margin.table(ex28table2, 2) # B frequencies (summed over A) i.e politics summed over Gender</code></pre>
+<pre><code>## politics
+##      Liberal     Moderate Conservative 
+##           85           80           27</code></pre>
+<pre class="r"><code>prop.table(ex28table2) # cell percentages</code></pre>
+<pre><code>##         politics
+## Gender     Liberal  Moderate Conservative
+##   Female 0.1822917 0.1875000    0.0312500
+##   Male   0.2604167 0.2291667    0.1093750</code></pre>
+<pre class="r"><code>prop.table(ex28table2, 1) # row percentages</code></pre>
+<pre><code>##         politics
+## Gender      Liberal   Moderate Conservative
+##   Female 0.45454545 0.46753247   0.07792208
+##   Male   0.43478261 0.38260870   0.18260870</code></pre>
+<pre class="r"><code>prop.table(ex28table2, 2) # column percentages</code></pre>
+<pre><code>##         politics
+## Gender     Liberal  Moderate Conservative
+##   Female 0.4117647 0.4500000    0.2222222
+##   Male   0.5882353 0.5500000    0.7777778</code></pre>
+<pre class="r"><code>  # margins with totals
+addmargins(prop.table(ex28table2, 2)) # column percentages with margins</code></pre>
+<pre><code>##         politics
+## Gender     Liberal  Moderate Conservative       Sum
+##   Female 0.4117647 0.4500000    0.2222222 1.0839869
+##   Male   0.5882353 0.5500000    0.7777778 1.9160131
+##   Sum    1.0000000 1.0000000    1.0000000 3.0000000</code></pre>
+<p>This gives the information we need to be able to answer the questions:</p>
+<div id="a-find-the-conditional-distributions-percentages-of-political-views-of-females" class="section level4">
+<h4>a) Find the conditional distributions (percentages) of political views of females</h4>
+<pre class="r"><code># need to get use the row percentages to get the right numbers.
+# just for fun, can prefilter the data using dplyr
+
+library(dplyr)
+ex28Female &lt;- filter(ex28stack,Gender==&quot;Female&quot;)
+
+ex28tableF &lt;- xtabs(number_students~Gender+politics, data=ex28Female)
+
+prop.table(ex28tableF, 1) # row percentages</code></pre>
+<pre><code>##         politics
+## Gender      Liberal   Moderate Conservative
+##   Female 0.45454545 0.46753247   0.07792208
+##   Male</code></pre>
+</div>
+<div id="b-same-as-a-but-for-males" class="section level4">
+<h4>b) same as a, but for males</h4>
+<pre class="r"><code># need to get use the row percentages to get the right numbers.
+# just for fun, can prefilter the data using dplyr
+
+library(dplyr)
+ex28Male &lt;- filter(ex28stack,Gender==&quot;Male&quot;)
+
+ex28tableM &lt;- xtabs(number_students~Gender+politics, data=ex28Male)
+
+prop.table(ex28tableM, 1) # row percentages</code></pre>
+<pre><code>##         politics
+## Gender     Liberal  Moderate Conservative
+##   Female                                 
+##   Male   0.4347826 0.3826087    0.1826087</code></pre>
+</div>
+<div id="c-make-a-graphcial-display-that-compares-the-two-distributions" class="section level4">
+<h4>c) make a graphcial display that compares the two distributions</h4>
+<pre class="r"><code># This page was useful https://www.r-graph-gallery.com/48-grouped-barplot-with-ggplot2.html
+
+
+library(ggplot2)
+
+ ggplot(ex28stack, aes(fill=politics, y=percent_students, x=Gender, label = paste0(round(percent_students*100), &quot;%&quot;))) + geom_bar(position = &quot;fill&quot;, stat = &quot;identity&quot;)</code></pre>
+<p><img src="chapter2_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>However, this doesn’t get any labels on the chart, which is apparently really difficult for some reason (maybe I’ll go back to Excel ;-) ) Explanation was here: <a href="https://gist.github.com/jsonbecker/0cc702804512fdf29c7f9067adfc17d0" class="uri">https://gist.github.com/jsonbecker/0cc702804512fdf29c7f9067adfc17d0</a> What this does is make a percentage calculation for the GROUP of gender first, so the initial bar chart at the beginning of this process was wrong because it didn’t group the data first, but gave a percentage for each cmbination of Gender and politics.</p>
+<pre class="r"><code>library(ggplot2)
+library(dplyr)
+
+# dplyr uses pipes to create new data in the dataframe %&gt;% 
+ex28stack %&gt;% 
+  group_by(Gender) %&gt;% 
+  
+#prop is the new variable being created to hold the percentage calculations
+  mutate(prop = number_students / sum(number_students)) %&gt;% 
+  
+  
+  ggplot(aes(Gender, prop, fill = politics)) + 
+  geom_col() +
+  geom_text(aes(label = scales::percent(prop)), position = position_stack(vjust = 0.5))  </code></pre>
+<p><img src="chapter2_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+</div>
+<div id="d-are-the-variables-politics-and-sex-independent" class="section level4">
+<h4>d) Are the variables Politics and Sex independent?</h4>
+<p>No, there seems to be a fairly strong indication that Males are more likely to describe themeselves as conservative compared to females.</p>
+</div>
+<div id="notes" class="section level4">
+<h4>notes</h4>
+<p>I also tried the library “summarytools” but I couldn’t find how to specify that the table should look at the sum of the values and not the number of rows:</p>
+<pre class="r"><code>library(summarytools)</code></pre>
+<pre><code>## Registered S3 method overwritten by &#39;pryr&#39;:
+##   method      from
+##   print.bytes Rcpp</code></pre>
+<pre class="r"><code>summarytools::freq(ex28stack$Gender, order = &quot;freq&quot;)</code></pre>
+<pre><code>## Frequencies  
+## 
+##                Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ------------ ------ --------- -------------- --------- --------------
+##       Female      3     50.00          50.00     50.00          50.00
+##         Male      3     50.00         100.00     50.00         100.00
+##         &lt;NA&gt;      0                               0.00         100.00
+##        Total      6    100.00         100.00    100.00         100.00</code></pre>
+<pre class="r"><code>print(ctable(ex28stack$Gender, ex28stack$politics, prop = &quot;r&quot;), method = &quot;render&quot;)</code></pre>
+<div class="container st-container">
+<h3>Cross-Tabulation, Row Proportions</h3>
+<h4>ex28stack$Gender * ex28stack$politics</h4>
+<table class="table table-bordered st-table st-table-bordered st-cross-table ">
+<thead>
+<tr>
+<th></th>
+<th colspan="12" align="center" class="st-protect-top-border">ex28stack$politics</th>
+<th colspan="4"></th>
+</tr>
+<tr>
+<td align="center">
+<strong>ex28stack$Gender</strong>
+</td>
+<th colspan="4" align="center">Liberal</th>
+<th colspan="4" align="center">Moderate</th>
+<th colspan="4" align="center">Conservative</th>
+<th colspan="4" align="center">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<strong align="center">Female</strong>
+</td>
+<td align="right" style="padding:0 0 0 15px;border-right:0;text-align:right">1</td>
+<td align="left" style="padding:0 1px 0 4px;border-left:0;border-right:0;text-align:left">(</td>
+<td align="left" style="padding:0;border-left:0;border-right:0;text-align:right">33.3%</td>
+<td align="left" style="padding:0 15px 0 1px;border-left:0;text-align:right">)</td>
+<td align="right" style="padding:0 0 0 15px;border-right:0;text-align:right">1</td>
+<td align="left" style="padding:0 1px 0 4px;border-left:0;border-right:0;text-align:left">(</td>
+<td align="left" style="padding:0;border-left:0;border-right:0;text-align:right">33.3%</td>
+<td align="left" style="padding:0 15px 0 1px;border-left:0;text-align:right">)</td>
+<td align="right" style="padding:0 0 0 15px;border-right:0;text-align:right">1</td>
+<td align="left" style="padding:0 1px 0 4px;border-left:0;border-right:0;text-align:left">(</td>
+<td align="left" style="padding:0;border-left:0;border-right:0;text-align:right">33.3%</td>
+<td align="left" style="padding:0 15px 0 1px;border-left:0;text-align:right">)</td>
+<td align="right" style="padding:0 0 0 15px;border-right:0;text-align:right">3</td>
+<td align="left" style="padding:0 1px 0 4px;border-left:0;border-right:0;text-align:left">(</td>
+<td align="left" style="padding:0;border-left:0;border-right:0;text-align:right">100.0%</td>
+<td align="left" style="padding:0 15px 0 1px;border-left:0;text-align:right">)</td>
+</tr>
+<tr>
+<td>
+<strong align="center">Male</strong>
+</td>
+<td align="right" style="padding:0 0 0 15px;border-right:0;text-align:right">1</td>
+<td align="left" style="padding:0 1px 0 4px;border-left:0;border-right:0;text-align:left">(</td>
+<td align="left" style="padding:0;border-left:0;border-right:0;text-align:right">33.3%</td>
+<td align="left" style="padding:0 15px 0 1px;border-left:0;text-align:right">)</td>
+<td align="right" style="padding:0 0 0 15px;border-right:0;text-align:right">1</td>
+<td align="left" style="padding:0 1px 0 4px;border-left:0;border-right:0;text-align:left">(</td>
+<td align="left" style="padding:0;border-left:0;border-right:0;text-align:right">33.3%</td>
+<td align="left" style="padding:0 15px 0 1px;border-left:0;text-align:right">)</td>
+<td align="right" style="padding:0 0 0 15px;border-right:0;text-align:right">1</td>
+<td align="left" style="padding:0 1px 0 4px;border-left:0;border-right:0;text-align:left">(</td>
+<td align="left" style="padding:0;border-left:0;border-right:0;text-align:right">33.3%</td>
+<td align="left" style="padding:0 15px 0 1px;border-left:0;text-align:right">)</td>
+<td align="right" style="padding:0 0 0 15px;border-right:0;text-align:right">3</td>
+<td align="left" style="padding:0 1px 0 4px;border-left:0;border-right:0;text-align:left">(</td>
+<td align="left" style="padding:0;border-left:0;border-right:0;text-align:right">100.0%</td>
+<td align="left" style="padding:0 15px 0 1px;border-left:0;text-align:right">)</td>
+</tr>
+<tr>
+<td>
+<strong align="center">Total</strong>
+</td>
+<td align="right" style="padding:0 0 0 15px;border-right:0;text-align:right">2</td>
+<td align="left" style="padding:0 1px 0 4px;border-left:0;border-right:0;text-align:left">(</td>
+<td align="left" style="padding:0;border-left:0;border-right:0;text-align:right">33.3%</td>
+<td align="left" style="padding:0 15px 0 1px;border-left:0;text-align:right">)</td>
+<td align="right" style="padding:0 0 0 15px;border-right:0;text-align:right">2</td>
+<td align="left" style="padding:0 1px 0 4px;border-left:0;border-right:0;text-align:left">(</td>
+<td align="left" style="padding:0;border-left:0;border-right:0;text-align:right">33.3%</td>
+<td align="left" style="padding:0 15px 0 1px;border-left:0;text-align:right">)</td>
+<td align="right" style="padding:0 0 0 15px;border-right:0;text-align:right">2</td>
+<td align="left" style="padding:0 1px 0 4px;border-left:0;border-right:0;text-align:left">(</td>
+<td align="left" style="padding:0;border-left:0;border-right:0;text-align:right">33.3%</td>
+<td align="left" style="padding:0 15px 0 1px;border-left:0;text-align:right">)</td>
+<td align="right" style="padding:0 0 0 15px;border-right:0;text-align:right">6</td>
+<td align="left" style="padding:0 1px 0 4px;border-left:0;border-right:0;text-align:left">(</td>
+<td align="left" style="padding:0;border-left:0;border-right:0;text-align:right">100.0%</td>
+<td align="left" style="padding:0 15px 0 1px;border-left:0;text-align:right">)</td>
+</tr>
+</tbody>
+</table>
+<p>Generated by <a href='https://github.com/dcomtois/summarytools'>summarytools</a> 0.9.4 (<a href='https://www.r-project.org/'>R</a> version 3.6.1)<br/>2019-09-27</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

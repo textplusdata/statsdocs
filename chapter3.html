@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Chapter 3</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">My Website</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Contents
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Stats Data and Models</li>
+    <li>
+      <a href="chapter1.html">Chapter 1</a>
+    </li>
+    <li>
+      <a href="chapter2.html">Chapter 2</a>
+    </li>
+    <li>
+      <a href="chapter3.html">Chapter 3</a>
+    </li>
+    <li>
+      <a href="chapter4.html">Chapter 4</a>
+    </li>
+    <li>
+      <a href="chapter5.html">Chapter 5</a>
+    </li>
+    <li>
+      <a href="chapter6.html">Chapter 6</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Notes about using R</li>
+    <li>
+      <a href="using-rmarkdown.html">Using R Markdown</a>
+    </li>
+    <li>
+      <a href="other-notes.html">Other notes</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Chapter 3</h1>
+
+</div>
+
+
+<div id="histograms" class="section level2">
+<h2>Histograms</h2>
+<p>Bar chart showing number of cases in each “bin”, the bin can be defined in many different ways with different “widths”.</p>
+<p>In R there is a basic histogram function:</p>
+<pre class="r"><code>hist(cars$dist)</code></pre>
+<p><img src="chapter3_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>This basic functionality can be enhanced using ggplot, this time modified so bin width is 10.</p>
+<pre class="r"><code>library(ggplot2)
+# Basic histogram. 
+# Note have to set boundary to make it start from zero, otherwise get strange results. 
+# Can either set the binwidth to a number to split the bins into clear groups 
+# e.g. 0 to 500, 500 to 1000, or set number of bins e.g. bins=20
+
+# Tips from http://www.sthda.com/english/wiki/ggplot2-histogram-plot-quick-start-guide-r-software-and-data-visualization
+
+ggplot(cars, aes(x=dist)) +
+geom_histogram(binwidth=10, boundary =0, color=&quot;black&quot;, fill=&quot;white&quot;)  + 
+
+  geom_vline(aes(xintercept=mean(dist)), color=&quot;blue&quot;, linetype=&quot;dashed&quot;, size=1) +
+  # NOTE to get the labels have to make sure the statbin is the same as the histogram
+  
+  stat_bin(binwidth=10,boundary=0, geom=&quot;text&quot;, aes(label=..count..) ,  
+           vjust = -0.5, hjust = 0.5) +
+    scale_x_continuous(breaks = seq(0 , max(cars$dist)*1.1 , 10 ))</code></pre>
+<p><img src="chapter3_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><em>Relative frequency histogram</em> - replaces the counts of cases in each bin with percentage of total cases.</p>
+<p><span class="math inline">\(\color{red}{\text{SWEDISH: Relativfrekvens = relative frequency histogram}}\)</span></p>
+</div>
+<div id="stem-and-leaf" class="section level2">
+<h2>Stem and leaf</h2>
+<p>Useful for creating mini charts by hand. Say we have the number 32, 33, 35, 45, 49, 53, 56, 61, 62, 62, 62</p>
+<p>We can define our “stem” (or bins) as the “tens” and then the units as the leaves so:</p>
+<p>3 | 2 3 5</p>
+<p>4 | 5 9</p>
+<p>5 | 3 6</p>
+<p>6 | 1 2 2 2</p>
+<p>It creates a little side-on bar chart :-)</p>
+</div>
+<div id="difference-between-bar-chart-and-histogram" class="section level2">
+<h2>Difference between bar chart and histogram</h2>
+<p>You can’t show categorical data in a histogram and you can’t show quantitative data in a bar chart (not sure what the book means here..)</p>
+</div>
+<div id="histogram-shape" class="section level2">
+<h2>Histogram shape</h2>
+<div id="modes" class="section level3">
+<h3>modes</h3>
+<p>If the histogram just looks like a mountain, then it is called “unimodal”. A mode in a histogram is a mountain peak. A histogram with 2 peaks will be bi-modal and three or more will be multimodal. A flat histogram is called uniform.</p>
+</div>
+<div id="symmetry" class="section level3">
+<h3>symmetry</h3>
+<p>A histogram that is even on both sides of the peak is symmetrical. Most histograms will have a “tail” where the distribution thins out to one side. This longer tail is the <em>skewed</em> side of the histogram. Cases at the very ends of a distribution are known as <em>outliers</em>.</p>
+<p><span class="math inline">\(\color{red}{\text{SWEDISH: Skevhet (ett histogram är snett) = Skewdness}}\)</span></p>
+<p><span class="math inline">\(\color{red}{\text{SWEDISH: Fördelningsformer \n Formen till ett histogram kan beskrivas fråntre aspekter: \n (1) mode (eller typvärde på svenska) \n (2) symmetri och \n (3) outliers (eller uteliggare på svenska).}}\)</span></p>
+</div>
+</div>
+<div id="center-of-distribution" class="section level2">
+<h2>Center of distribution</h2>
+<p>To be able to say something about the different cases and the deviation in the distribution we must first find the center of distribution.</p>
+<p>This can be measured in a number of different ways.</p>
+<div id="median-center" class="section level3">
+<h3>Median center</h3>
+<p>The median is the case that is found in the middle of all the other cases. This means we just count the cases from the left of the histogram until we reach half the cases, and whatever value that middle case has is the median. If we are looking at a table then we sort the data in size order and then find the middle value.</p>
+<p>However, the median is not always (or often) the best way of finding out anything about the most “common” case. Instead the median gives us a way of comparing the center to the spread.</p>
+<pre class="r"><code>median(cars$dist)</code></pre>
+<pre><code>## [1] 36</code></pre>
+</div>
+</div>
+<div id="spread" class="section level2">
+<h2>Spread</h2>
+<p>The spread describes how much the data values vary around the center.</p>
+</div>
+<div id="range" class="section level2">
+<h2>Range</h2>
+<p>The range of the data is a <em>single number</em> calculated by simple taking the minimum value in the data with the maximum.</p>
+</div>
+<div id="interquartile-range" class="section level2">
+<h2>Interquartile range</h2>
+<p>To avoid extreme cases affecting interpretation of the data, we can look at the middle half of the data.</p>
+<p>Measuring IQR in R can be done in several different ways. See next section.</p>
+</div>
+<div id="boxplots-and-5-number-summaries" class="section level2">
+<h2>Boxplots and 5-number summaries</h2>
+<p>Let’s start with getting a “5-number” summary of the data:</p>
+<p>The standard R summary gives the following results:</p>
+<pre class="r"><code>summary(cars)</code></pre>
+<pre><code>##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00</code></pre>
+<p>Note, however, that there are different ways of calculating the IQR in statistics generally and in R.</p>
+<p>Note that R has another function called “fivenum” which gives slightly different results. It also provides no table headers, which is frustrating.</p>
+<pre class="r"><code>fivenum(cars$dist)</code></pre>
+<pre><code>## [1]   2  26  36  56 120</code></pre>
+<p>The “quantile” function can also be used.</p>
+<pre class="r"><code>quantile(cars$dist)</code></pre>
+<pre><code>##   0%  25%  50%  75% 100% 
+##    2   26   36   56  120</code></pre>
+<p>Although not seen with this dataset, the difference between fivenum() and summary() lies in the lack of universal agreement on how the 1st and 3rd quartiles should be calculated. See this page for a summary: <a href="https://chemicalstatistician.wordpress.com/2013/08/12/exploratory-data-analysis-the-5-number-summary-two-different-methods-in-r-2/" class="uri">https://chemicalstatistician.wordpress.com/2013/08/12/exploratory-data-analysis-the-5-number-summary-two-different-methods-in-r-2/</a></p>
+<p>The IQR is calculated as the range between the 1st and 3rd quartiles (the “middle” of the data) and is simply calculated as IQR3-IQR1. So in the case of the cars’ distance, it is 56 - 26 = 30.</p>
+<p>R has an inbuilt IQR function to calculate this.</p>
+<pre class="r"><code>IQR(cars$dist)</code></pre>
+<pre><code>## [1] 30</code></pre>
+<p>Boxplots are ways of visualising the the data, showing the spread of cases in the “middle” of the data (in the IQR) and the extents of the “fenced data” and finally the outliers.</p>
+<p>The fences are a concept developed by John Tukey, with the idea that a useful way of understanding a population is too look at those cases that are within the ranges close to IQR1 and IQR3.</p>
+<div id="note--this-needs-writing-which-one-to-go-for" class="section level3">
+<h3>NOTE -THIS NEEDS WRITING ! Which one to go for?!</h3>
+<p><a href="https://lagunita.stanford.edu/courses/course-v1:Medicine+IPE21CC+ongoing/wiki/HRP258/example-r-classwork-solutions-using-r/calculating-inner-quartile-range-r/" class="uri">https://lagunita.stanford.edu/courses/course-v1:Medicine+IPE21CC+ongoing/wiki/HRP258/example-r-classwork-solutions-using-r/calculating-inner-quartile-range-r/</a></p>
+<p>Using the IQR, you can then calculate the lower and upper Tukey fences, developed by John Wilder Tukey.</p>
+<p>Note that the rounding gives slightly different figures when done by hand as it is based on the rounded numbers from the 5-number summary:</p>
+<p>LowerFence = Q1 - (1.5 <em>IQR) = 26 - (1.5</em> 30) = 26 - 45 = - 19 UpperFence = Q3 + (1.5 * IQR) = 56 + (1.5 * 30) = 56 + 45 = 101</p>
+<p>Let’s make the calculation with R:</p>
+<pre class="r"><code>carsIQR &lt;- IQR(cars$dist)
+carsIQR</code></pre>
+<pre><code>## [1] 30</code></pre>
+<pre class="r"><code># Lower Fence
+LowerFence &lt;- 26 - (1.5 * carsIQR)
+
+# Upper Fence
+UpperFence &lt;- 56 + (1.5 * carsIQR)
+
+
+
+# Get figures
+print(LowerFence); print(UpperFence)</code></pre>
+<pre><code>## [1] -19</code></pre>
+<pre><code>## [1] 101</code></pre>
+<p>The lower fence is well below the minimum case in the data, so there are no outliers for low-value cases. However, the maximum case in the data (120) is greater than the upper fence of 101, so we have outliers for high-value cases.</p>
+<p>Let’s make a boxplot and compare it to the histogram</p>
+<pre class="r"><code>boxplot(cars$dist, horizontal = TRUE)</code></pre>
+<p><img src="chapter3_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="r"><code>boxplot(cars$dist, horizontal = TRUE)</code></pre>
+<p><img src="chapter3_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre class="r"><code>hist(cars$dist, breaks =10)</code></pre>
+<p><img src="chapter3_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
+<p>And sure enough, the boxplot shows one outlier and the IQR of 30 between the values of 26 and 56.</p>
+<p><span class="math inline">\(\color{red}{\text{SWEDISH: intervallsbredd = histogram bins}}\)</span></p>
+</div>
+</div>
+<div id="center-of-symmetric-distrubutions---the-mean-divided-average" class="section level2">
+<h2>Center of Symmetric Distrubutions - the Mean (divided average)</h2>
+<p>The mean is the sum of the total values divided by the total number of cases. In Greek the letter “simga” (s) is used for sum <span class="math inline">\(\sum\)</span> which in Rmarkdown is rendered like this:</p>
+<pre><code>$\sum$</code></pre>
+<p>NOTE for mathematics symbols in RMarkdown see <a href="https://www.calvin.edu/~rpruim/courses/s341/S17/from-class/MathinRmd.html" class="uri">https://www.calvin.edu/~rpruim/courses/s341/S17/from-class/MathinRmd.html</a></p>
+<p>So the formula to calculate the Mean is Total/n, or:</p>
+<p><span class="math inline">\(\frac{\sum {y}} n\)</span></p>
+<p>“Y” is used for variables used to summarise or model data. “X” is used for summarising/modelling predictions for “Y”.</p>
+<p>The Mean is called “y-bar” sometimes and symbolised like this: <span class="math inline">\(\overline{y}\)</span></p>
+<p>The full mathematical notation for the formula is: <span class="math inline">\(\overline{y}\)</span> = <span class="math inline">\(\frac{\sum {y}} n\)</span></p>
+<p>In symmetrical distributions the Mean and the Median should be very close to each other.</p>
+<p>The Mean also provides the exact center of balance for the VALUES of the cases in a population. However, it doesn’t give a good guide to frequency since if the data is skewed by a few high values you will get a high “mean” where the majority of actually cases might be the the left of it rather then the right.</p>
+<p>Consider salaries where the boss earns a lot and the rest of the staff earn more or less the same:</p>
+<p>salary.df &lt;- data.frame(Salary = c(1000, 900, 950, 955, 1010,5250))</p>
+<pre class="r"><code>salary.df &lt;- data.frame(Salary = c(1000, 900, 950, 955, 1010, 999, 1020, 5250))
+
+summary(salary.df)</code></pre>
+<pre><code>##      Salary      
+##  Min.   : 900.0  
+##  1st Qu.: 953.8  
+##  Median : 999.5  
+##  Mean   :1510.5  
+##  3rd Qu.:1012.5  
+##  Max.   :5250.0</code></pre>
+<p>Here the mean is calculated as 1510, but no-one earns more than 1020 apart from the boss. In this case the Median is a good guide (but of course we need the rest of the 5-number summary to explain what else is going on).</p>
+<p>If we map a boxplot we get a pretty pancake-looking box:</p>
+<pre class="r"><code>boxplot(salary.df)</code></pre>
+<p><img src="chapter3_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>So because the median looks only at the sorted order of values, we say that it is <em>RESISTANT</em> to <em>VALUES</em>.</p>
+<p>So when deciding whether to describe the center using the MEan or the Median, the guide is that the mean is best when the distribution is symmetrical but the Median is best when it is skewed.</p>
+</div>
+<div id="spread-of-symmetric-distributions---the-standard-deviation" class="section level2">
+<h2>Spread of Symmetric Distributions - The Standard Deviation</h2>
+<p>While the IQR is a good way of summarising spread, the fact that it looks at only two quartiles of data means it can’t say much about individual deviations. <em>IF</em> the data is <em>symmetric</em> then a more powerful analysis tool is standard deviation which works out how far each value is away from the mean.</p>
+<p>If we then averaged the deviations from the mean then the positive deviations will cancel out the negative ones.</p>
+<p>So instead we square the deviations to make them positive. Then add up the squared deviations and find the average, which gives the “VARIANCE”</p>
+<p>$ s^{2$ “s” always denoted the standard deviation, it means the variance of a set of data</p>
+<p>$  $ is the mean</p>
+<p>For each data point, take away the mean and then square the result</p>
+<p>So the variance formula is</p>
+<p>$ s^{2}= $</p>
+<p>Note that instead of dividing by the number of cases (n) we divide by the number of cases minus 1 because reasons…</p>
+<p>To get back to the original units (since we are currently in squared units) have to get the square root, so the final formula is</p>
+<p>$ s^{2}= $</p>
+<p>If there is no spread at all, and all the values are identical, then the deviation is zero.</p>
+</div>
+<div id="what-to-say-about-a-quantitative-variable" class="section level2">
+<h2>What to say about a Quantitative Variable</h2>
+<p>When trying to say something about a variable, consider the following:</p>
+<ul>
+<li>Make a histogram and discuss the shape</li>
+<li>Discuss center and spread
+<ul>
+<li>Median should be discussed in conjunction with the IQR</li>
+<li>Mean should be discussed in conjunction with standard deviation</li>
+<li>Not following this rule means you never have enough info to make a conclusion</li>
+<li>If shape is skewed, report median and IQR. Mean and standard deviation are also of internest, but explain why mean and median are different</li>
+<li>If shape is symmetrical, then main issue is mean and standard deviation, but median and IQR can be useful. IQR will often be larger than standard deviation</li>
+</ul></li>
+<li>Observations
+<ul>
+<li>unimodal, bimodal, multimodal</li>
+<li>skew</li>
+<li>outliers</li>
+<li>whether data could be further broken down to make more useful observations (e.g. weight could be broken into two gender groups)</li>
+<li>Outliers always skew standard deviation, which is why IQR &amp; median is most useful for skewed data.</li>
+</ul></li>
+</ul>
+</div>
+<div id="questions-for-chapter-3" class="section level2">
+<h2>Questions for Chapter 3</h2>
+<div id="q27---standard-deviation" class="section level3">
+<h3>Q27 - Standard deviation</h3>
+<ol style="list-style-type: lower-alpha">
+<li>Predict which one has the greater standard deviation. Should be set2 because the range is greater.</li>
+</ol>
+<pre class="r"><code>questA &lt;- data.frame(Set1 = c(4,7,8,9,12), Set2 = c(3,6,8,10,13))
+summary(questA)</code></pre>
+<pre><code>##       Set1         Set2   
+##  Min.   : 4   Min.   : 3  
+##  1st Qu.: 7   1st Qu.: 6  
+##  Median : 8   Median : 8  
+##  Mean   : 8   Mean   : 8  
+##  3rd Qu.: 9   3rd Qu.:10  
+##  Max.   :12   Max.   :13</code></pre>
+<pre class="r"><code>sd(questA$Set1)</code></pre>
+<pre><code>## [1] 2.915476</code></pre>
+<pre class="r"><code>sd(questA$Set2)</code></pre>
+<pre><code>## [1] 3.807887</code></pre>
+<pre class="r"><code>cat(&quot;Set 1 standard deviation = &quot;, sd(questA$Set1), &quot;\n&quot;)</code></pre>
+<pre><code>## Set 1 standard deviation =  2.915476</code></pre>
+<pre class="r"><code>cat(&quot;Set 2 standard deviation = &quot;, sd(questA$Set2))</code></pre>
+<pre><code>## Set 2 standard deviation =  3.807887</code></pre>
+<p>Set 2 did have the highest Standard Deviation with a value of 3.8</p>
+</div>
+<div id="q28---standard-deviation" class="section level3">
+<h3>Q28 - Standard deviation</h3>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Set 2 should have highest standard deviation. Although the range is 50 in both, the first set has larger numbers so proportionally should be smaller</li>
+</ol>
+<pre class="r"><code>questB &lt;- data.frame(Set1 = c(100,140,150,160,200), Set2 = c(10,50,60,70,110))
+summary(questB)</code></pre>
+<pre><code>##       Set1          Set2    
+##  Min.   :100   Min.   : 10  
+##  1st Qu.:140   1st Qu.: 50  
+##  Median :150   Median : 60  
+##  Mean   :150   Mean   : 60  
+##  3rd Qu.:160   3rd Qu.: 70  
+##  Max.   :200   Max.   :110</code></pre>
+<pre class="r"><code>sd(questB$Set1)</code></pre>
+<pre><code>## [1] 36.05551</code></pre>
+<pre class="r"><code>sd(questB$Set2)</code></pre>
+<pre><code>## [1] 36.05551</code></pre>
+<pre class="r"><code>cat(&quot;Set 1 standard deviation = &quot;, sd(questB$Set1), &quot;\n&quot;)</code></pre>
+<pre><code>## Set 1 standard deviation =  36.05551</code></pre>
+<pre class="r"><code>cat(&quot;Set 2 standard deviation = &quot;, sd(questB$Set2))</code></pre>
+<pre><code>## Set 2 standard deviation =  36.05551</code></pre>
+<p>Comments - wrong! It doesn’t matter what the starting numbers are, the squared differences will be the same? This was slightly counterintuitve :-)</p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>The range is larger in Set 2, so Set 1 will have smaller standard deviation</li>
+</ol>
+<pre class="r"><code>questC &lt;- data.frame(Set1 = c(10,16,18,20,22,28), Set2 = c(48,56,58,60,62,70))
+summary(questC)</code></pre>
+<pre><code>##       Set1           Set2     
+##  Min.   :10.0   Min.   :48.0  
+##  1st Qu.:16.5   1st Qu.:56.5  
+##  Median :19.0   Median :59.0  
+##  Mean   :19.0   Mean   :59.0  
+##  3rd Qu.:21.5   3rd Qu.:61.5  
+##  Max.   :28.0   Max.   :70.0</code></pre>
+<pre class="r"><code>sd(questC$Set1)</code></pre>
+<pre><code>## [1] 6.033241</code></pre>
+<pre class="r"><code>sd(questC$Set2)</code></pre>
+<pre><code>## [1] 7.238784</code></pre>
+<pre class="r"><code>cat(&quot;Set 1 standard deviation = &quot;, sd(questC$Set1), &quot;\n&quot;)</code></pre>
+<pre><code>## Set 1 standard deviation =  6.033241</code></pre>
+<pre class="r"><code>cat(&quot;Set 2 standard deviation = &quot;, sd(questC$Set2),&quot;\n&quot;)</code></pre>
+<pre><code>## Set 2 standard deviation =  7.238784</code></pre>
+<pre class="r"><code>cat(&quot;Note that the IQR for both sets is also the same&quot;, &quot;\n&quot;)</code></pre>
+<pre><code>## Note that the IQR for both sets is also the same</code></pre>
+<pre class="r"><code>cat(&quot;Set 1 IQR = &quot;, IQR(questC$Set1), &quot;\n&quot;)</code></pre>
+<pre><code>## Set 1 IQR =  5</code></pre>
+<pre class="r"><code>cat(&quot;Set 2 IQR = &quot;, IQR(questC$Set2),&quot;\n&quot;)</code></pre>
+<pre><code>## Set 2 IQR =  5</code></pre>
+<p>Yes, that was correct!</p>
+</div>
+<div id="question-43" class="section level3">
+<h3>Question 43</h3>
+<p>This stem and leaf data (50 cases - the population of 50 states in the US in millions)</p>
+<p>0 | 1111111111122223333334444</p>
+<p>0 | 555556666667789</p>
+<p>1 | 000233</p>
+<p>1 | 99</p>
+<p>2 |</p>
+<p>2 | 5</p>
+<p>3 |</p>
+<p>3 | 7</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Which measure of center and spread are most appropriate? Most appropriate to use Median and IQR since the data is heavily skewed to the right</p></li>
+<li><p>Which must be larger, the median or the mean? The Mean because it will be skewed to the right by the large population figures of two states</p></li>
+<li><p>Find median and IQR? Median = average of 25th and 26th data points = 4 million + 5 million /2 = 4.5 million IQR = 3rd Quartile - 1st Quartile 1st Quartile = average of 12th &amp; 13th data point = 2 million + 2 million / 2 = 2 million 3rd quartile = average of 37th &amp; 38th data point = 7 million + 8 million /2 = 7.5 million IQR = 7.5 - 2 = 5.5 million</p></li>
+<li><p>describe the distribution</p></li>
+</ol>
+<p>The data is unimodal, and is heavily skewed to the right. There are two obvious outlier with populations of 25 and 37 million, therfore the best approach is to use Median and IQR for this data. A box plot would show quite a “pancaked” box, with long upper fence.</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

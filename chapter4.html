@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Chapter 4</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">My Website</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Contents
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Stats Data and Models</li>
+    <li>
+      <a href="chapter1.html">Chapter 1</a>
+    </li>
+    <li>
+      <a href="chapter2.html">Chapter 2</a>
+    </li>
+    <li>
+      <a href="chapter3.html">Chapter 3</a>
+    </li>
+    <li>
+      <a href="chapter4.html">Chapter 4</a>
+    </li>
+    <li>
+      <a href="chapter5.html">Chapter 5</a>
+    </li>
+    <li>
+      <a href="chapter6.html">Chapter 6</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Notes about using R</li>
+    <li>
+      <a href="using-rmarkdown.html">Using R Markdown</a>
+    </li>
+    <li>
+      <a href="other-notes.html">Other notes</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Chapter 4</h1>
+
+</div>
+
+
+<div id="understanding-and-comparing-distributions" class="section level1">
+<h1>Understanding and Comparing Distributions</h1>
+<p>This chapter uses data from Hopkins Forest data taken from here: <a href="https://dasl.datadescription.com/datafile/hopkins-forest/" class="uri">https://dasl.datadescription.com/datafile/hopkins-forest/</a> (couldn’t find it in the book’s data folder)</p>
+<p>Key column: Avg.Wind..mph.</p>
+<pre class="r"><code>library(readr)
+forest &lt;- read_delim(&quot;data/hopkins-forest.txt&quot;, &quot;\t&quot;, escape_double = FALSE, trim_ws = TRUE)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_double(),
+##   Date = col_character()
+## )</code></pre>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+<pre class="r"><code>forest.df &lt;- data.frame(forest)
+summary(forest.df)</code></pre>
+<pre><code>##      Date                Year          Month             Day       
+##  Length:365         Min.   :2011   Min.   : 1.000   Min.   : 1.00  
+##  Class :character   1st Qu.:2011   1st Qu.: 4.000   1st Qu.: 8.00  
+##  Mode  :character   Median :2011   Median : 7.000   Median :16.00  
+##                     Mean   :2011   Mean   : 6.526   Mean   :15.72  
+##                     3rd Qu.:2011   3rd Qu.:10.000   3rd Qu.:23.00  
+##                     Max.   :2011   Max.   :12.000   Max.   :31.00  
+##   Day.of.Year   Avg.Temp..C.      Max.Temp..C.     Min.Temp..C.    
+##  Min.   :  1   Min.   :-21.270   Min.   :-14.99   Min.   :-28.400  
+##  1st Qu.: 92   1st Qu.:  0.350   1st Qu.:  4.88   1st Qu.: -4.400  
+##  Median :183   Median :  9.780   Median : 15.40   Median :  3.660  
+##  Mean   :183   Mean   :  8.277   Mean   : 14.11   Mean   :  3.079  
+##  3rd Qu.:274   3rd Qu.: 17.520   3rd Qu.: 23.63   3rd Qu.: 11.830  
+##  Max.   :365   Max.   : 27.570   Max.   : 34.12   Max.   : 19.610  
+##   Avg.Temp..F.    Max.Temp..F.    Min.Temp..F.    Avg.Rel.Hum....
+##  Min.   :-6.29   Min.   : 5.02   Min.   :-19.12   Min.   :39.46  
+##  1st Qu.:32.64   1st Qu.:40.78   1st Qu.: 24.08   1st Qu.:69.11  
+##  Median :49.60   Median :59.72   Median : 38.59   Median :77.30  
+##  Mean   :46.90   Mean   :57.40   Mean   : 37.54   Mean   :76.07  
+##  3rd Qu.:63.53   3rd Qu.:74.53   3rd Qu.: 53.29   3rd Qu.:84.35  
+##  Max.   :81.62   Max.   :93.42   Max.   : 67.30   Max.   :98.21  
+##  Max.Rel.Hum....  Min.Rel.Hum.... Avg.Sol.Rad..w.m.2. Max.Sol.Rad..w.m.2.
+##  Min.   : 57.70   Min.   :15.46   Min.   :  3.08      Min.   :  19.0     
+##  1st Qu.: 91.10   1st Qu.:38.92   1st Qu.: 56.16      1st Qu.: 437.0     
+##  Median : 95.20   Median :48.49   Median :114.99      Median : 690.0     
+##  Mean   : 92.79   Mean   :50.82   Mean   :138.57      Mean   : 679.1     
+##  3rd Qu.: 96.20   3rd Qu.:62.50   3rd Qu.:212.47      3rd Qu.: 962.0     
+##  Max.   :100.00   Max.   :96.20   Max.   :355.93      Max.   :1390.0     
+##  Min.Sol.Rad..w.m.2. Total.Sol.Rad..w.m.2. Avg.Wind..mph.  Max.Wind..mph. 
+##  Min.   :0           Min.   :  441         Min.   :0.000   Min.   : 4.60  
+##  1st Qu.:0           1st Qu.: 7999         1st Qu.:0.460   1st Qu.:11.40  
+##  Median :0           Median :16449         Median :1.120   Median :16.00  
+##  Mean   :0           Mean   :19689         Mean   :1.508   Mean   :17.22  
+##  3rd Qu.:0           3rd Qu.:30184         3rd Qu.:2.280   3rd Qu.:21.48  
+##  Max.   :0           Max.   :50898         Max.   :6.730   Max.   :40.55  
+##  Min.Wind..mph. Avg.Barom..mb.   Max.Barom..mb. Min.Barom..mb.
+##  Min.   :0      Min.   : 988.3   Min.   : 993   Min.   : 974  
+##  1st Qu.:0      1st Qu.:1006.1   1st Qu.:1009   1st Qu.:1002  
+##  Median :0      Median :1009.8   Median :1013   Median :1007  
+##  Mean   :0      Mean   :1010.0   Mean   :1014   Mean   :1006  
+##  3rd Qu.:0      3rd Qu.:1013.7   3rd Qu.:1017   3rd Qu.:1011  
+##  Max.   :0      Max.   :1029.5   Max.   :1032   Max.   :1026  
+##   Precip..in.     Deep.Well..ft.   Shallow.Well..ft. X80.cm.Soil..C.
+##  Min.   :0.0000   Min.   : 3.460   Min.   :0.770     Min.   : 2.67  
+##  1st Qu.:0.0000   1st Qu.: 3.970   1st Qu.:1.320     1st Qu.: 4.66  
+##  Median :0.0000   Median : 5.030   Median :1.660     Median :10.20  
+##  Mean   :0.1681   Mean   : 5.647   Mean   :2.245     Mean   :10.71  
+##  3rd Qu.:0.1700   3rd Qu.: 6.160   3rd Qu.:2.360     3rd Qu.:16.10  
+##  Max.   :4.9800   Max.   :11.830   Max.   :7.200     Max.   :18.96  
+##  X10.cm.Soil..C.
+##  Min.   : 0.54  
+##  1st Qu.: 2.70  
+##  Median :11.21  
+##  Mean   :10.76  
+##  3rd Qu.:18.18  
+##  Max.   :22.85</code></pre>
+<p>Create a histogram of the Average wind speed (mph)</p>
+<pre class="r"><code>hist(forest.df$Avg.Wind..mph.)</code></pre>
+<p><img src="chapter4_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>The 5-number summary is as follows:</p>
+<pre class="r"><code>summary(forest.df$Avg.Wind..mph.)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.000   0.460   1.120   1.508   2.280   6.730</code></pre>
+<p>To divide the data between summer and winter, we can do the following:</p>
+<pre class="r"><code># used this website: https://www.r-bloggers.com/5-ways-to-subset-a-data-frame-in-r/
+# https://www.datanovia.com/en/lessons/subset-data-frame-rows-in-r/
+# note used the &quot;AND&quot; logical operator
+
+
+library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>summer.df &lt;- select(filter(forest.df, Month &gt;=4 &amp; Month &lt;=9),c(Month,Avg.Wind..mph.,Date))
+
+summary(summer.df)</code></pre>
+<pre><code>##      Month       Avg.Wind..mph.      Date          
+##  Min.   :4.000   Min.   :0.000   Length:183        
+##  1st Qu.:5.000   1st Qu.:0.350   Class :character  
+##  Median :7.000   Median :0.710   Mode  :character  
+##  Mean   :6.503   Mean   :1.114                     
+##  3rd Qu.:8.000   3rd Qu.:1.615                     
+##  Max.   :9.000   Max.   :5.470</code></pre>
+<pre class="r"><code>hist(summer.df$Avg.Wind..mph.)</code></pre>
+<p><img src="chapter4_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code># used this website: https://www.r-bloggers.com/5-ways-to-subset-a-data-frame-in-r/
+# note used the &quot;OR&quot; logical operator
+
+library(dplyr)
+winter.df &lt;- select(filter(forest.df, Month &lt;=3 | Month &gt;=10),c(Month,Avg.Wind..mph.,Date))
+
+summary(winter.df)</code></pre>
+<pre><code>##      Month        Avg.Wind..mph.      Date          
+##  Min.   : 1.000   Min.   :0.020   Length:182        
+##  1st Qu.: 2.000   1st Qu.:0.840   Class :character  
+##  Median :10.000   Median :1.720   Mode  :character  
+##  Mean   : 6.549   Mean   :1.904                     
+##  3rd Qu.:11.000   3rd Qu.:2.658                     
+##  Max.   :12.000   Max.   :6.730</code></pre>
+<pre class="r"><code>hist(winter.df$Avg.Wind..mph.)</code></pre>
+<p><img src="chapter4_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Now run a boxplot diagram with a boxplot for each month:</p>
+<pre class="r"><code># use the tilde sign to signify which variable is to be used for grouping
+
+boxplot(forest.df$Avg.Wind..mph ~ forest.df$Month)</code></pre>
+<p><img src="chapter4_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div id="dealing-with-outliers" class="section level2">
+<h2>Dealing with outliers</h2>
+<p>Identifying outliers is useful because they can be excpetions to a rule, show us something significant about the data OR identify issues with data quality itself - perhaps the data is wrong with a decimla place error or a units measurement error. Especially when dealing with different number formats e.g. US and Sweden, decimal points can often go awry if you don’t pay attention to data conversion.</p>
+<p>You can choose to omit an outlier, but you should present the data both with and without the outlier, and explain your reasoning.</p>
+</div>
+<div id="timeplots" class="section level2">
+<h2>Timeplots</h2>
+<p>Timeplots are essentially a scattergraph with time along the x axis, sorted in order</p>
+<p>Smoothing lines can be used to find the trend in the data.</p>
+<p>Below is an example of smoothed timeplot in R. A simple algorithm for smoothing is to group “windows” of data and then take the average for that group and plot that as a data point for the smooth line.</p>
+<p>There are different methods for smoothing e.g.</p>
+<ul>
+<li>Loess smoothing</li>
+<li>generalized additive mode smoothing</li>
+</ul>
+<pre class="r"><code>library(ggplot2)
+
+ggplot(forest.df, aes(x = Day.of.Year, y = Avg.Wind..mph.)) + geom_point() + geom_smooth()</code></pre>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="chapter4_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>With trend lines, it can be tempting to make forecasts or the future, but for anything other than physics / biology / chemistry, this will normally be very difficult to go beyond generalisations.</p>
+</div>
+<div id="re-expressing-data" class="section level2">
+<h2>Re-expressing data</h2>
+<p>When data is significantly skewed, it can be hard to say anything useful about the data.</p>
+<p>One option is to <em>Re-express</em> or <em>transform</em> the data through using logarithms (or square root).</p>
+<p>By applying a logarithm to data, you can normally make it more symmetrical. This may help give a better picture of the outliers. Note that if a data point is still an outlier <em>AFTER</em> applying logarithm then that is a <em>serious</em> outlier!</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
