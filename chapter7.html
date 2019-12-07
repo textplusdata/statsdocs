@@ -12,7 +12,7 @@
 
 
 
-<title>Chapter 1</title>
+<title>Chapter 7</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -346,54 +346,116 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Chapter 1</h1>
+<h1 class="title toc-ignore">Chapter 7</h1>
 
 </div>
 
 
-<div id="what-is-statistics" class="section level1">
-<h1>What is statistics?</h1>
-<ol style="list-style-type: decimal">
-<li>Gathering data</li>
-<li>Analysing data</li>
-<li>Drawing conclusions</li>
-</ol>
-<p>Learn methods to be able to make statements about a population or identify correlations between variables.</p>
-<p>Methods will include * linear regression analysis * averages - mean, median and mode * correlation coefficient analysis: -1 = strong negative relation, 0 = no relationship, 1 = strong positive relationsvip * standard deviation * probability * hypothesis testing</p>
-<p>Statistics is required for solving different problems in different sectors of society.</p>
-<p>Statistical conclusions should not be accepted uncritically.</p>
+<div id="linear-regression" class="section level1">
+<h1>Linear Regression</h1>
+<p>Linear regression helps us to predict what one variable will be if we have data for another variable. Correlation on its own is not enough.</p>
+<div id="least-squares---the-line-of-best-fit" class="section level2">
+<h2>Least squares - the line of best fit</h2>
+<p>It is possible to draw a line of best fit through data to help make predictions.Of course, the line won’t join up with all of the data points, but it will show the trend. We want the line that is closest to all the data points compared to any other possible line.</p>
+<p>The predicted value from the model is called y-hat or: $  $</p>
+<p>Now we have the data, lets run the summary:</p>
+<pre class="r"><code>summary(burgers)</code></pre>
+<pre><code>##                                       Item      Serving_size  
+##  1%LowFatChocolateMilk(8oz)             :  1   Min.   : 43.0  
+##  A1¨_Steakhouse_XTª                     :  1   1st Qu.:113.5  
+##  AmericanOriginalChicken_Sandwich       :  1   Median :158.0  
+##  Bacon_Cheeseburger                     :  1   Mean   :167.8  
+##  BaconEgg&amp;CheeseBiscuit                 :  1   3rd Qu.:216.5  
+##  Biscuit_w/ChickenFri[er(ChickenBiscuit):  1   Max.   :487.0  
+##  (Other)                                :116   NA&#39;s   :11     
+##     Calories       Fat_Cal          Fat_g          SatFat_g     
+##  Min.   :  25   Min.   :  0.0   Min.   : 0.00   Min.   : 0.000  
+##  1st Qu.: 310   1st Qu.:127.5   1st Qu.:14.25   1st Qu.: 4.000  
+##  Median : 410   Median :190.0   Median :22.00   Median : 7.000  
+##  Mean   : 454   Mean   :206.2   Mean   :24.83   Mean   : 8.701  
+##  3rd Qu.: 550   3rd Qu.:267.0   3rd Qu.:33.00   3rd Qu.:12.000  
+##  Max.   :1310   Max.   :650.0   Max.   :82.00   Max.   :32.000  
+##                 NA&#39;s   :6                                       
+##    TransFat_g        Chol_mg         Sodium_mg          Carb_g      
+##  Min.   :0.0000   Min.   :  0.00   Min.   :   0.0   Min.   :  2.00  
+##  1st Qu.:0.0000   1st Qu.: 20.00   1st Qu.: 490.0   1st Qu.: 27.00  
+##  Median :0.0000   Median : 52.50   Median : 905.0   Median : 34.50  
+##  Mean   :0.3033   Mean   : 92.83   Mean   : 930.2   Mean   : 39.65  
+##  3rd Qu.:0.5000   3rd Qu.:143.75   3rd Qu.:1245.0   3rd Qu.: 50.00  
+##  Max.   :2.0000   Max.   :455.00   Max.   :3310.0   Max.   :134.00  
+##                                                                     
+##     Fiber_g         Sugar_g         Protein_g    
+##  Min.   :0.000   Min.   : 0.000   Min.   : 0.00  
+##  1st Qu.:1.000   1st Qu.: 3.000   1st Qu.: 7.00  
+##  Median :1.000   Median : 6.000   Median :15.50  
+##  Mean   :1.897   Mean   : 9.967   Mean   :18.02  
+##  3rd Qu.:3.000   3rd Qu.: 9.750   3rd Qu.:24.75  
+##  Max.   :9.000   Max.   :58.000   Max.   :71.00  
+##  NA&#39;s   :6</code></pre>
+<p>Now to replicate the scatter plot in the textbook:</p>
+<pre class="r"><code># This was useful: https://cran.r-project.org/web/packages/ggrepel/vignettes/ggrepel.html
+
+library(ggplot2)
+library(ggrepel)
+ggplot(burgers) +
+ aes(x = Protein_g, y = Fat_g) +
+ geom_point(size = 3L,color = ifelse(burgers$Protein_g &gt;30.5 &amp; burgers$Protein_g &lt;31.8, &quot;red&quot;, &quot;black&quot;)) +
+
+ #geom_smooth(span = 0.75) +
+  geom_smooth(method=&#39;lm&#39;,color=&quot;red&quot;) +
+ labs(x = &quot;Protein (grams)&quot;, y = &quot;Fat (grams)&quot;, title = &quot;Burger King meal items&quot;) +
+  
+  # use modified geom_text code to filter labels to only specifics
+   geom_text_repel(data=subset(burgers, Protein_g &gt;30.5 &amp; Protein_g &lt;31.8 ),
+            aes(Protein_g,Fat_g,label=Item)) +
+ theme_minimal()</code></pre>
+<p><img src="chapter7_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>We would expect the items with around 31 grams of protein to have about 37 grams of fat, but one of these items only has 22 grams of fat. It is a chicken sandwich, and chicken normally has a lower fat content. The other item, the Double-Bacon cheesburger, is much closer to the predictde value.</p>
+<p>The <em>residual</em> tells us how far off from the predicted value the observed value is.</p>
+<p>Residual = Observed value - Predicted value.</p>
+<p>In this case the residual is about 15 grams of fat.</p>
+<p>So the best-fit line will be the one with the least residuals.</p>
+<p><em>BUT</em> if we just add up all the residuals, some will be negative and some will be positive, so they will cancel each other out. So instead we square the values, just like we do in standard deviation, so we only have positive numbers.</p>
+<p>So the line can be evaluated by squaring all the residuals and then choosing the line with the smallest sum. Also known as <em>“the least squares line”</em> (this is a bit weird, because least squares sounds like the least number of squares but it’s actually the smallest square sum…)</p>
 </div>
-<div id="definitions" class="section level1">
-<h1>Definitions</h1>
-<div id="who-and-what" class="section level2">
-<h2>Who and What</h2>
-<ul>
-<li>Respondents - people who answer a survey</li>
-<li>Subjects/Participants - involved in experiments</li>
-<li>Experimental Units - animals, plants, websites etc.</li>
-<li>Records - the rows in the data, normally represent the “who” of the data. Also known as “cases” - could be customers, employees etc.</li>
-<li>Population - all the cases</li>
-<li>Sample - some of the cases from the population</li>
-</ul>
+<div id="linear-model" class="section level2">
+<h2>Linear model</h2>
+<p>In algebra, a straight line can be written as: y = mx + b</p>
+<p>The linear model can be written in similar way in statistics:</p>
+<p>$  = b_0 + b_1x$</p>
+<p>y-hat signifies that these are predicted values. $ b_1$ is the slope while $ b_0$ is the <em>intercept</em> - the value where the line cuts the y-axis.</p>
+<p>So in the Burger King example above, the line of best fit is:</p>
+<p>$  = $ 8.4 + 0.91g Protein</p>
+<p>The line starts at 8.4g (though this is misleading of course and it doesn’t necessarily mean that an item exists with 0g Protein will have 8.g of fat, so this part of the line should be considered carefully) and then for every additional gram of protein, the item contains an additional 0.91grams of Fat.</p>
 </div>
-<div id="variables" class="section level2">
-<h2>Variables</h2>
-<div id="categorical-variables" class="section level3">
-<h3>Categorical variables</h3>
-<p>Categories e.g. male/female. Also known as “nominal variables” or “qualitative variables”. Sometimes it may be a numeric field, but is still categorical e.g. telephone area code or time-reporting worktype code.</p>
-</div>
-<div id="quantitative-variables" class="section level3">
-<h3>Quantitative variables</h3>
-<p>Measured numerical values with measurement units e.g. dollars, meters, gigabytes.</p>
-</div>
-<div id="identifiers" class="section level3">
-<h3>Identifiers</h3>
-<p>Consider it as a unique key. Also known as “identifier” variable. Crucial for relational databases, but not so necessary for analysis itself (if each row is the identifier anyway).</p>
-</div>
-<div id="ordinal-variables" class="section level3">
-<h3>Ordinal variables</h3>
-<p>A numeric value but without a clear unit. For example, a measurement of how someone feels about something on a scale of 1 to 5. This type of variable is one to be careful of because the unit type is essentially “made up” e.g. “happiness value units”.</p>
-<p>Sometimes a quantitative variable can be used as a categorical variable, for example age could be quantitative (enables calculation for average age for example) might could also be used to group people into categories e.g. Youth, Senior Citizens etc.</p>
+<div id="finding-the-least-squares-line" class="section level2">
+<h2>Finding the least squares line</h2>
+<p>The formula is built up of:</p>
+<p>The means - tells us where to put the line The standard deviations - to get the units The correlation - to tell us the strength of the relationship.</p>
+<p>So slope (b1) is:</p>
+<p>$ b_1 = r $</p>
+<p>Correlations don’t have units, but slopes do, for example you express time in days, months or years and you would get a different slope depending on which one you used (growth of kids expressed over years will look much sharper than expressed over days…, it will also result in a different standard deviation number, which will be much larger when measuring in days compared to years).</p>
+<p>The units of the slope are always <em>how many units of y per unit of x</em>.</p>
+<p>The intercept: The value of y when the x value was $  $ should obviously be $  $. So:</p>
+<p><span class="math inline">\(b_0 = \overline{y} - b_1 \overline{x}\)</span></p>
+<p>Intercept = y-mean minus slope * x-mean</p>
+<div id="example---finding-regression-equation" class="section level3">
+<h3>Example - finding regression equation</h3>
+<p>Need to get the Mean of the variables and the standard deviation.</p>
+<pre class="r"><code>fatMean &lt;- mean(burgers$Fat_g)
+
+fatMean</code></pre>
+<pre><code>## [1] 24.82787</code></pre>
+<pre class="r"><code>protMean &lt;- mean(burgers$Protein_g)
+
+protMean</code></pre>
+<pre><code>## [1] 18.01639</code></pre>
+<pre class="r"><code>fatSD &lt;- sd(burgers$Fat_g)
+fatSD</code></pre>
+<pre><code>## [1] 16.19557</code></pre>
+<pre class="r"><code>protSD &lt;- sd(burgers$Protein_g)
+protSD</code></pre>
+<pre><code>## [1] 13.48766</code></pre>
 </div>
 </div>
 </div>

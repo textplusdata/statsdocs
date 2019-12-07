@@ -12,7 +12,7 @@
 
 
 
-<title>Chapter 1</title>
+<title>Chapter 6</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -23,6 +23,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -346,55 +348,88 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Chapter 1</h1>
+<h1 class="title toc-ignore">Chapter 6</h1>
 
 </div>
 
 
-<div id="what-is-statistics" class="section level1">
-<h1>What is statistics?</h1>
-<ol style="list-style-type: decimal">
-<li>Gathering data</li>
-<li>Analysing data</li>
-<li>Drawing conclusions</li>
-</ol>
-<p>Learn methods to be able to make statements about a population or identify correlations between variables.</p>
-<p>Methods will include * linear regression analysis * averages - mean, median and mode * correlation coefficient analysis: -1 = strong negative relation, 0 = no relationship, 1 = strong positive relationsvip * standard deviation * probability * hypothesis testing</p>
-<p>Statistics is required for solving different problems in different sectors of society.</p>
-<p>Statistical conclusions should not be accepted uncritically.</p>
+<div id="scatterplots-association-and-correlation" class="section level1">
+<h1>Scatterplots, Association and Correlation</h1>
+<p>Direction of the scatterplot is important. “Downward” is negative (see example below), upward is positive, messy = no clear correlation, flat line = no impact.</p>
+<p>The “response” variable is on the y-axis. The “explanatory/predictor” is on the x-axis. When using time data, the time is usually put on the x-axis, with the time being the “predictor” for the values on the y-axis.</p>
+<p>Curved scatterplots suggest that you might have two different groups in the data, one with a positive correlation and one with a negative correlation.</p>
+<p>In the example below, the data is divided by the mean lines. Top-left and bottom-right corners have a negative relation to the mean. Top-right and bottom-left corners have a positive relation to the mean. As you can see, there are only one or two data points clearly in a positive quadrants, the rest all fall into the negative relationship.</p>
+<pre class="r"><code># Simple Scatterplot
+attach(mtcars)</code></pre>
+<pre><code>## The following object is masked from package:ggplot2:
+## 
+##     mpg</code></pre>
+<pre class="r"><code>plot(wt, mpg, main=&quot;Scatterplot Example&quot;,
+   xlab=&quot;Car Weight&quot;, ylab=&quot;Miles Per Gallon&quot;)
+
+mpgMean = mean(mtcars$mpg)
+wtMean = mean(mtcars$wt)
+
+abline(v=wtMean, col=&quot;blue&quot;)
+abline(h=mpgMean, col=&quot;red&quot;)</code></pre>
+<p><img src="chapter6_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>Why? Because in the bottom-left quadrant all the scores are both less than the mean y axis AND less than the mean x axis, so the sum of xy will be positive. However, in top left and bottom right, there is one “positive” number (greater than one axis mean) and one “negative” number (less than one of the axis means) so the sum of the those xy data points will always be negative.</p>
+<p>The plot can be standardised by converting all the data points to z-scores i.e. recalculated around a mean of zero.</p>
+<p>Correlation coefficient is normally called “r” and is calculated as follows:</p>
+<p>$ r =  $</p>
+<p>Or</p>
+<p>$ r =  $</p>
+<p>The bottom line being the same as saying (n-1) multipled by standard deviation of x and standard deviation of y.</p>
+<p>Correlation calculations can only be made on data that is straight or nearly straight.</p>
+<div id="types-of-correlation" class="section level2">
+<h2>Types of correlation</h2>
+<div id="kendalls-tau" class="section level3">
+<h3>Kendall’s Tau</h3>
+<p>Measures all the slopes between two possible points, assigns them as negative, positive or no slope. Once this has been done, take the difference between positive and negative slopes, and divide by number of slopes. This will result in a number between minus 1 and 1.</p>
 </div>
-<div id="definitions" class="section level1">
-<h1>Definitions</h1>
-<div id="who-and-what" class="section level2">
-<h2>Who and What</h2>
-<ul>
-<li>Respondents - people who answer a survey</li>
-<li>Subjects/Participants - involved in experiments</li>
-<li>Experimental Units - animals, plants, websites etc.</li>
-<li>Records - the rows in the data, normally represent the “who” of the data. Also known as “cases” - could be customers, employees etc.</li>
-<li>Population - all the cases</li>
-<li>Sample - some of the cases from the population</li>
-</ul>
+<div id="spearmans-rho" class="section level3">
+<h3>Spearman’s rho</h3>
+<p>Spearman’s approach was to turn all the data points in ranks instead of them having their actual values. This helps to reduce impact of outliers. Spearman’s rho is the correlation of these rank values rather than the values themselves.</p>
+<p>Both these approaches are “nonparametric” as they measure the association without having to be tied to a parameter or model.</p>
 </div>
-<div id="variables" class="section level2">
-<h2>Variables</h2>
-<div id="categorical-variables" class="section level3">
-<h3>Categorical variables</h3>
-<p>Categories e.g. male/female. Also known as “nominal variables” or “qualitative variables”. Sometimes it may be a numeric field, but is still categorical e.g. telephone area code or time-reporting worktype code.</p>
 </div>
-<div id="quantitative-variables" class="section level3">
-<h3>Quantitative variables</h3>
-<p>Measured numerical values with measurement units e.g. dollars, meters, gigabytes.</p>
+<div id="correlation-is-not-the-same-as-causation" class="section level2">
+<h2>Correlation is not the same as causation</h2>
+<p>Obviously.</p>
+<p><em>Correlation tables</em> are a way of presenting data with multiple variables to help find which pairs of variables seem to have strongest relationship.</p>
+<p>Here is an example:</p>
+<pre class="r"><code>cor(mtcars)</code></pre>
+<pre><code>##             mpg        cyl       disp         hp        drat         wt
+## mpg   1.0000000 -0.8521620 -0.8475514 -0.7761684  0.68117191 -0.8676594
+## cyl  -0.8521620  1.0000000  0.9020329  0.8324475 -0.69993811  0.7824958
+## disp -0.8475514  0.9020329  1.0000000  0.7909486 -0.71021393  0.8879799
+## hp   -0.7761684  0.8324475  0.7909486  1.0000000 -0.44875912  0.6587479
+## drat  0.6811719 -0.6999381 -0.7102139 -0.4487591  1.00000000 -0.7124406
+## wt   -0.8676594  0.7824958  0.8879799  0.6587479 -0.71244065  1.0000000
+## qsec  0.4186840 -0.5912421 -0.4336979 -0.7082234  0.09120476 -0.1747159
+## vs    0.6640389 -0.8108118 -0.7104159 -0.7230967  0.44027846 -0.5549157
+## am    0.5998324 -0.5226070 -0.5912270 -0.2432043  0.71271113 -0.6924953
+## gear  0.4802848 -0.4926866 -0.5555692 -0.1257043  0.69961013 -0.5832870
+## carb -0.5509251  0.5269883  0.3949769  0.7498125 -0.09078980  0.4276059
+##             qsec         vs          am       gear        carb
+## mpg   0.41868403  0.6640389  0.59983243  0.4802848 -0.55092507
+## cyl  -0.59124207 -0.8108118 -0.52260705 -0.4926866  0.52698829
+## disp -0.43369788 -0.7104159 -0.59122704 -0.5555692  0.39497686
+## hp   -0.70822339 -0.7230967 -0.24320426 -0.1257043  0.74981247
+## drat  0.09120476  0.4402785  0.71271113  0.6996101 -0.09078980
+## wt   -0.17471588 -0.5549157 -0.69249526 -0.5832870  0.42760594
+## qsec  1.00000000  0.7445354 -0.22986086 -0.2126822 -0.65624923
+## vs    0.74453544  1.0000000  0.16834512  0.2060233 -0.56960714
+## am   -0.22986086  0.1683451  1.00000000  0.7940588  0.05753435
+## gear -0.21268223  0.2060233  0.79405876  1.0000000  0.27407284
+## carb -0.65624923 -0.5696071  0.05753435  0.2740728  1.00000000</code></pre>
 </div>
-<div id="identifiers" class="section level3">
-<h3>Identifiers</h3>
-<p>Consider it as a unique key. Also known as “identifier” variable. Crucial for relational databases, but not so necessary for analysis itself (if each row is the identifier anyway).</p>
-</div>
-<div id="ordinal-variables" class="section level3">
-<h3>Ordinal variables</h3>
-<p>A numeric value but without a clear unit. For example, a measurement of how someone feels about something on a scale of 1 to 5. This type of variable is one to be careful of because the unit type is essentially “made up” e.g. “happiness value units”.</p>
-<p>Sometimes a quantitative variable can be used as a categorical variable, for example age could be quantitative (enables calculation for average age for example) might could also be used to group people into categories e.g. Youth, Senior Citizens etc.</p>
-</div>
+<div id="straightening-scatterplots" class="section level2">
+<h2>straightening scatterplots</h2>
+<p>Re-expressing the data can help identify correlation. For example, you may have a relation i.e. as one variable gets larger, so does the other, but it might not do so in a linear way.</p>
+<p>A logarithm can be run on the data to help to straighten it out.</p>
+<p>The “ladder of powers” presents the application of a different “power” to the data to try to straighten out data.</p>
+<p>For example, power of y2 (square) is good for unimodal data that is skewed to left or scatterplot that bends down.</p>
 </div>
 </div>
 

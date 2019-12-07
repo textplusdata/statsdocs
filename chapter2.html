@@ -16,7 +16,7 @@
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -103,33 +103,33 @@ summary {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 51px;
+  padding-top: 45px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 50px;
+  margin-top: -50px;
 }
 .section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 50px;
+  margin-top: -50px;
 }
 .section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 50px;
+  margin-top: -50px;
 }
 .section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 50px;
+  margin-top: -50px;
 }
 .section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 50px;
+  margin-top: -50px;
 }
 .section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 50px;
+  margin-top: -50px;
 }
 .dropdown-submenu {
   position: relative;
@@ -267,7 +267,7 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">My Website</a>
+      <a class="navbar-brand" href="index.html">Stats Documents</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -303,6 +303,21 @@ $(document).ready(function () {
     <li>
       <a href="chapter6.html">Chapter 6</a>
     </li>
+    <li>
+      <a href="chapter7.html">Chapter 7</a>
+    </li>
+    <li>
+      <a href="chapter8.html">Chapter 8</a>
+    </li>
+    <li>
+      <a href="chapter10.html">Chapter 10, 11, 12, 13, 14</a>
+    </li>
+    <li>
+      <a href="chapter15.html">Chapter 15</a>
+    </li>
+    <li>
+      <a href="chapterX.html">Chapter XXX</a>
+    </li>
     <li class="divider"></li>
     <li class="dropdown-header">Notes about using R</li>
     <li>
@@ -310,6 +325,12 @@ $(document).ready(function () {
     </li>
     <li>
       <a href="other-notes.html">Other notes</a>
+    </li>
+    <li>
+      <a href="packages.html">Packages</a>
+    </li>
+    <li>
+      <a href="maths-symbols.html">Maths symbols</a>
     </li>
   </ul>
 </li>
@@ -333,22 +354,22 @@ $(document).ready(function () {
 <div id="data-presentation" class="section level1">
 <h1>Data presentation</h1>
 <div id="frequency-table" class="section level2">
-<h2>frequency table</h2>
+<h2>Frequency table</h2>
 <p>A summary of rows by category. Normally a count “how frequent does this category type show up in the data?”</p>
 </div>
 <div id="relative-frequency-table" class="section level2">
-<h2>relative frequency table</h2>
+<h2>Relative frequency table</h2>
 <p>Same as above but categories are calculated as a percentage of the total.</p>
 </div>
 <div id="contingency-table" class="section level2">
-<h2>contingency table</h2>
+<h2>Contingency table</h2>
 <p>Think pivot table in Excel with rows and columns. Take two variables and compare how individuals are distributed along each variable (column) contingent on the other variable (row).</p>
 <div id="marginal-distribution-in-contingency-table" class="section level3">
-<h3>marginal distribution in contingency table</h3>
+<h3>Marginal distribution in contingency table</h3>
 <p>Marginal distribution is essentially the “total” column /row for each of the variables. Marginal distribution can be in counts or percentages.</p>
 </div>
 <div id="conditional-distribution" class="section level3">
-<h3>conditional distribution</h3>
+<h3>Conditional distribution</h3>
 <p>This is distribution of one variable that <em>only</em> satisfy a condition on another variable e.g. distribution of titanic passengers by class that died vs. same distribution for those that survived.</p>
 </div>
 </div>
@@ -357,13 +378,14 @@ $(document).ready(function () {
 <h1>Analysis</h1>
 </div>
 <div id="dependence-independence" class="section level1">
-<h1>dependence / independence</h1>
+<h1>Dependence / independence</h1>
 <p>If there is no difference in conditional distribution of a variable for different categories in another variable then we can say that the variables are independent of each other.</p>
 <p>This is only a very simplified approach to statistical analysis, more will come later.</p>
 </div>
 <div id="simpsons-paradox" class="section level1">
 <h1>Simpson’s paradox</h1>
 <p>When looking at the overall result can get what appears to be contradictory results when looking at group results. So, overall, one student has a worse average than another student but if you look at the breakdown by test type, one student takes a lot of hard tests (and scores 70% right against the other student getting only 50% right, but takes less hard tests) while the same student scores higher on the easy tests (90% versus only 85% by the other student), because the other student takes mostly easy tests, their overall average is higher.</p>
+<p>A good example can be found here: <a href="https://paulvanderlaken.com/2017/09/27/simpsons-paradox-two-hr-examples-with-r-code/" class="uri">https://paulvanderlaken.com/2017/09/27/simpsons-paradox-two-hr-examples-with-r-code/</a></p>
 <div id="notes-on-exercises-for-chapter-2" class="section level2">
 <h2>Notes on exercises for Chapter 2</h2>
 <div id="exercise-15" class="section level3">
@@ -709,7 +731,7 @@ ex28stack %&gt;%
 </tr>
 </tbody>
 </table>
-<p>Generated by <a href='https://github.com/dcomtois/summarytools'>summarytools</a> 0.9.4 (<a href='https://www.r-project.org/'>R</a> version 3.6.1)<br/>2019-09-27</p>
+<p>Generated by <a href='https://github.com/dcomtois/summarytools'>summarytools</a> 0.9.4 (<a href='https://www.r-project.org/'>R</a> version 3.6.1)<br/>2019-12-07</p>
 </div>
 </div>
 </div>

@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Chapter 10, 11, 12, 13, 14</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 45px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h2 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h3 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h4 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h5 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h6 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Stats Documents</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Contents
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Stats Data and Models</li>
+    <li>
+      <a href="chapter1.html">Chapter 1</a>
+    </li>
+    <li>
+      <a href="chapter2.html">Chapter 2</a>
+    </li>
+    <li>
+      <a href="chapter3.html">Chapter 3</a>
+    </li>
+    <li>
+      <a href="chapter4.html">Chapter 4</a>
+    </li>
+    <li>
+      <a href="chapter5.html">Chapter 5</a>
+    </li>
+    <li>
+      <a href="chapter6.html">Chapter 6</a>
+    </li>
+    <li>
+      <a href="chapter7.html">Chapter 7</a>
+    </li>
+    <li>
+      <a href="chapter8.html">Chapter 8</a>
+    </li>
+    <li>
+      <a href="chapter10.html">Chapter 10, 11, 12, 13, 14</a>
+    </li>
+    <li>
+      <a href="chapter15.html">Chapter 15</a>
+    </li>
+    <li>
+      <a href="chapterX.html">Chapter XXX</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Notes about using R</li>
+    <li>
+      <a href="using-rmarkdown.html">Using R Markdown</a>
+    </li>
+    <li>
+      <a href="other-notes.html">Other notes</a>
+    </li>
+    <li>
+      <a href="packages.html">Packages</a>
+    </li>
+    <li>
+      <a href="maths-symbols.html">Maths symbols</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Chapter 10, 11, 12, 13, 14</h1>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#chapter-10-understanding-randomness"><span class="toc-section-number">1</span> CHAPTER 10: Understanding Randomness</a><ul>
+<li><a href="#sample-simulation"><span class="toc-section-number">1.1</span> Sample simulation</a></li>
+</ul></li>
+<li><a href="#example-with-birthdays"><span class="toc-section-number">2</span> Example with birthdays</a></li>
+<li><a href="#creating-sample-data"><span class="toc-section-number">3</span> Creating sample data</a></li>
+<li><a href="#chapter-11-sample-surveys"><span class="toc-section-number">4</span> CHAPTER 11: Sample Surveys</a><ul>
+<li><a href="#the-3-big-ideas-of-sampling"><span class="toc-section-number">4.1</span> The 3 big ideas of sampling</a></li>
+<li><a href="#populations-and-paramters"><span class="toc-section-number">4.2</span> Populations and paramters</a></li>
+</ul></li>
+<li><a href="#chapter-12-experimental-design"><span class="toc-section-number">5</span> CHAPTER 12: Experimental design</a></li>
+<li><a href="#chapter-13-randomness-to-probability"><span class="toc-section-number">6</span> CHAPTER 13: Randomness to probability</a><ul>
+<li><a href="#law-of-large-numbers"><span class="toc-section-number">6.1</span> Law of large numbers</a></li>
+</ul></li>
+<li><a href="#chapter-14-probability-rules"><span class="toc-section-number">7</span> CHAPTER 14: Probability rules</a><ul>
+<li><a href="#conditional-probability"><span class="toc-section-number">7.1</span> Conditional probability</a></li>
+<li><a href="#independence"><span class="toc-section-number">7.2</span> Independence</a></li>
+<li><a href="#independence-is-not-disjoint"><span class="toc-section-number">7.3</span> Independence IS NOT Disjoint</a></li>
+<li><a href="#picturing-probability"><span class="toc-section-number">7.4</span> Picturing probability</a></li>
+<li><a href="#probability-tree"><span class="toc-section-number">7.5</span> Probability tree</a></li>
+</ul></li>
+</ul>
+</div>
+
+<p><em>Chapters 10 - 14</em></p>
+<div id="chapter-10-understanding-randomness" class="section level1">
+<h1><span class="header-section-number">1</span> CHAPTER 10: Understanding Randomness</h1>
+<p>To determine a random sample from a population, create a random number list, assign random numbers to each member of population and then re-sort sample based on the randome number list and take, e.g., the first 100.</p>
+<p>Simulations can be run to try and work out the probability of something happening.</p>
+<p>A simulation is built on components and then the SEQUENCE of components.</p>
+<p>For example, if we want to know the least number of cereal boxes we need to open to have a BETTER THAN 50% chance of collecting all the stickers in a series, then: Component = opening a box Outcome = which sticker was in the box Response variable = number of boxes required until we have complete collection.</p>
+<div id="sample-simulation" class="section level2">
+<h2><span class="header-section-number">1.1</span> Sample simulation</h2>
+<p>The stickers to collect in the cereal boxes are 20% Nick Cave, 30% Miles Hunt and 50% Ian Brown.</p>
+<p>So we can say that we will have ten numbers from 1-10 and Nick will be assigned numbers 1 &amp; 2, Miles numbers 3,4 &amp; 5 while Ian will get numbers 6,7,8,9,10.</p>
+<p>We can then keep generating component outcomes and count how many times we have to open a box to get at least one of each singer.</p>
+<p>Each time we reach the target of at least one sticketr for each singer we start a new trial.</p>
+<p>We can then average out how many boxes needed to be opened in each trial.</p>
+<p>The more trials, the better. In this situation we would need at least, say, 20 trials to feel like we had some results to work with. Using a computer we can generate hundreds.</p>
+</div>
+</div>
+<div id="example-with-birthdays" class="section level1">
+<h1><span class="header-section-number">2</span> Example with birthdays</h1>
+<p>This will give the “correct” answer to the probablity of at least one pair of people in a group sharing the same random date. The example is set up as a small number of people with a small number of possible dates just to understand the logic. Repeat it with the desired number of possible days and people.</p>
+<pre class="r"><code># from https://stats.stackexchange.com/questions/431093/probability-that-any-two-people-have-the-same-birthday/431103#431103
+
+# For three people in a room where each of them is allocated a day number from one to six, the probability that none of them has the same day number as the others is: first person in the room is &quot;1&quot;
+# second person comes in and the chance of them NOT sharing same day number as first person is now 5 out of 6 chances
+# third and final person enters room and the probability that they don&#39;t have the same day number as EITHER person 1 or person 2 is 4 out of six chances.
+# So the calculation is:
+
+
+notSame &lt;- (6/6) * (5/6) * (4/6)
+cat(&quot;Chance of not being the same is: &quot;, notSame,&quot;\n&quot;,&quot;\n&quot;)</code></pre>
+<pre><code>## Chance of not being the same is:  0.5555556 
+## </code></pre>
+<pre class="r"><code># prod function gives us the possibility to calculate each fraction in turn as follows:
+
+# (&quot;prod&quot; returns the product of all the values present in its arguments)
+
+# this command gives the likelihood of the people in the group NOT sharing a day number with any other person
+
+people &lt;- 3
+days &lt;- 6
+
+notSameFormula &lt;- prod(days:(days - (people - 1))/days)
+
+cat(&quot;Chance of not being the same using forumla is: &quot;, notSameFormula,&quot;\n&quot;,&quot;\n&quot;)</code></pre>
+<pre><code>## Chance of not being the same using forumla is:  0.5555556 
+## </code></pre>
+<pre class="r"><code># can also be written with a &quot;power&quot;:
+# prod(days:(days-(people - 1)))/days^people
+
+# This means that the probability that at least one person shares the same day number as another person is:
+
+min1Same &lt;- 1 - prod(days:(days - (people - 1))/days)
+
+cat(&quot;Chance of there being at least two people with the same date: &quot;, min1Same,&quot;\n&quot;)</code></pre>
+<pre><code>## Chance of there being at least two people with the same date:  0.4444444</code></pre>
+<pre class="r"><code># Can run this for any combination of people and days, i.e. the example in Uppgift2</code></pre>
+</div>
+<div id="creating-sample-data" class="section level1">
+<h1><span class="header-section-number">3</span> Creating sample data</h1>
+<p>Code below details how to create sample data and then analyse and summarise the results.</p>
+<p>Note that would need to write more code in order to create a “macro” for dealing with the cerealbox example, the test being you would need to check if the sum of count(1 OR 2) + count ( 3 OR 4 OR 5) + count (6 OR 7 OR 8 OR 9 OR 10)=3, and as soon as this was TRUE stop the trial and count the number of attempts.</p>
+<pre class="r"><code># NOTE: From https://stats.stackexchange.com/questions/327601/birthday-paradox-how-to-estimate-the-probability-of-two-or-more-people-in-a-gro 
+
+# This creates a sample in R: dates = sample(1:365, 36, replace = TRUE)
+
+# To see if 2 or more share the same birthday:
+
+# This formula will result in TRUE if the number of dates is less than the number of unique dates: length(dates) != length(unique(dates)) 
+
+# Create 100 sample runs
+
+# Set seed to allow for replication, the seed can be any number you like!
+set.seed(555)
+
+dupe_count = 0
+runs = 100
+people = 36
+
+#create an empty dataframe
+results.df &lt;- data.frame()
+
+# loop until the number of runs is reached
+for (i in 1:runs) {
+  
+  # create a vector of where the number of people can have any day of the year between 1 and 365 and dulicates are allowed (replace = TRUE)
+  dates = sample(1:365, people, replace = TRUE)
+  
+  # &quot;length&quot; tells you how many elements are in the vector, so length(unique()) tells you hown many unique elements are in the data
+  # if there are more total elements than unique elements there must be duplicates
+  if (length(dates) != length(unique(dates))) {
+    
+  # if there is a duplicate, add it to the running-count of duplicates
+    dupe_count = dupe_count + 1
+  }
+  # add the random dates generated for each person to the results table, with one row for each run
+  results.df &lt;- rbind(results.df, dates)
+}
+
+# Compare the duplicate count to the total number of runs to find the percentage
+
+cat(&quot;Number of duplicates divided by number of runs: &quot;, print(dupe_count / runs), &quot;\n&quot;)</code></pre>
+<pre><code>## [1] 0.86
+## Number of duplicates divided by number of runs:  0.86</code></pre>
+<pre class="r"><code># Use the results dataframe to generate a summary table of our results so we know how many duplicates in each run
+
+# Rename the columns to make the dataframe more understandable
+colnames(results.df) &lt;- paste(&quot;PersonNumber_&quot;,1:people,sep= &quot;&quot;)
+
+# Generate vector for number of unique dates per row using the &quot;apply&quot; function (second argument is &quot;1&quot; for rows)
+numUnique = apply(results.df, 1, function(x) length(unique(x)))
+
+# for each result, work out the number of duplicates by subtracting the number of unique dates per run from the total number of people
+numDuplicates = people - numUnique
+
+# Generate another vector putting zero when there are no duplicates and 1 where there is at least one duplicate
+hasDuplicates = ifelse(numDuplicates &gt; 0, 1, 0)
+
+# Make a new dataframe that we can now use for querying or analysing by combining the vectors and added an additional column to retain the row number from the original results
+
+sumResults.df &lt;- data.frame(
+  RunNumber = as.integer(rownames(results.df)),
+  UniqueDates = numUnique,
+ NumberDuplicates = numDuplicates,
+ HasDuplicates = hasDuplicates)
+
+cat(&quot;Mean of HasDuplicates: &quot;, mean(sumResults.df$HasDuplicates), &quot;\n&quot;)</code></pre>
+<pre><code>## Mean of HasDuplicates:  0.86</code></pre>
+<pre class="r"><code># create a variable for the number of duplicates
+hData &lt;- sumResults.df$NumberDuplicates
+
+# show the results in a basic histogram
+hist(hData, breaks = seq(min(hData)-1, max(hData)+1, length.out = max(hData)+3),xlab=&quot;Number of Duplicates&quot;, ylab=&quot;Count of runs&quot;)</code></pre>
+<p><img src="chapter10_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="chapter-11-sample-surveys" class="section level1">
+<h1><span class="header-section-number">4</span> CHAPTER 11: Sample Surveys</h1>
+<div id="the-3-big-ideas-of-sampling" class="section level2">
+<h2><span class="header-section-number">4.1</span> The 3 big ideas of sampling</h2>
+<p>The 3 big ideas are: 1) You only need to examine part of a whole, as long as you can avoid BIAS 2) You should randomise i.e. “stir it up” 3) The size of the population isn’t as important as the size of the SAMPLE. You need enough sample to get a good enough “taste” of the whole population to be able to say something about that population. So a spoonful of a well-stirred soup is enough of the taste whether that soup is a small saucepan or a huge vat.</p>
+</div>
+<div id="populations-and-paramters" class="section level2">
+<h2><span class="header-section-number">4.2</span> Populations and paramters</h2>
+<p>Any summary from the data is called a “statistic”.</p>
+<p>In general, model parameters use Greek letters while statistics have latin letters.</p>
+<p>Mean model (greek): Mean statistic (latin):</p>
+<p>Slope model (greek): Slope statistic (latin):</p>
+<p>Population: Proportion from the data (i.e. the sample)</p>
+</div>
+</div>
+<div id="chapter-12-experimental-design" class="section level1">
+<h1><span class="header-section-number">5</span> CHAPTER 12: Experimental design</h1>
+<p>See “Uppgift 2”</p>
+</div>
+<div id="chapter-13-randomness-to-probability" class="section level1">
+<h1><span class="header-section-number">6</span> CHAPTER 13: Randomness to probability</h1>
+<ul>
+<li>Trial: an observation of a random phenomenon</li>
+<li>Outcome: value of that observation (e.g. a football score 5-1, 0-2, 1-1)</li>
+<li>Event: A grouping, or categorisation of outcomes (e.g. win, lose or draw)</li>
+</ul>
+<div class="figure">
+<img src="images/TrialsOutcomesEvents.png" alt="Trials, Outcomes, Events." />
+<p class="caption">Trials, Outcomes, Events.</p>
+</div>
+<div id="law-of-large-numbers" class="section level2">
+<h2><span class="header-section-number">6.1</span> Law of large numbers</h2>
+<p>Frequency of an event should, given enough trials, settle down to one average number e.g. the probability of green traffic light is: P(green) = 0.35</p>
+<p>P(A) = #times event A occurs / total #trials</p>
+<p>The law of averages, however, states that there can be no “expectation” in the <em>short run</em> i.e. just because an outcome hasn’t come up recently doesn’t mean that it is <em>more</em> likely to come up next. Chance has <em>no memory</em>.</p>
+<p>Also distinguish between <em>personal</em> probability and <em>formal</em> probability. Personal probability is about trying to express the degree of certainty / uncertainty about an upcoming event that <em>Cannot</em> be measuered in the long run.</p>
+<p>Formal probability is bsaed on observations and data.</p>
+</div>
+</div>
+<div id="chapter-14-probability-rules" class="section level1">
+<h1><span class="header-section-number">7</span> CHAPTER 14: Probability rules</h1>
+<p>The message is, as always, make a picture!</p>
+<p>The rules for probability are as follows:</p>
+<ol style="list-style-type: decimal">
+<li>0 &lt;= P &lt;= 1</li>
+</ol>
+<p>If probability is zero, the event <em>never</em> occurs. If probability is 1, the event <em>always</em> occurs.</p>
+<p>It is not possible for probability to be less than zero (less than never) or more than 1 (more than always).</p>
+<ol start="2" style="list-style-type: decimal">
+<li>P(s) = 1</li>
+</ol>
+<p>If a random phenomena has only one possible outcome it is of no interest. When there is more than one outcome, the SUM of all the possible outcomes is 1.</p>
+<p>Example: If probability of winning is 70% then probability of losing is 30% (assuming not possible to draw/tie) = 100%.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>P(<span class="math inline">\(A^c\)</span>) = 1 - P(A)</li>
+</ol>
+<p>The probability of an event <em>not</em> occurring is 1 minus the probability that it does occur.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>If probabilities are <em>disjoint</em> (no intersection) then <em>Addition rule</em>: P(A or B) = P(A) + P(B)</li>
+</ol>
+<p>If 20% chance a kid in a playground is in year 4 and 30% chance that they are in year 5 then the probability that kid is in <em>either</em> years 4 or 5 is 20 + 30 = 50%.</p>
+<div class="figure">
+<img src="images/VennDisjoint.png" alt="Venn diagram - disjointed." />
+<p class="caption">Venn diagram - disjointed.</p>
+</div>
+<p>The addition rule will not work if the probability has an intersect:</p>
+<div class="figure">
+<img src="images/VennIntersect.png" alt="Venn diagram - intersect." />
+<p class="caption">Venn diagram - intersect.</p>
+</div>
+<ol start="5" style="list-style-type: decimal">
+<li><em>Multiplication rule</em>: P(A and B) = P(A) x P(B)</li>
+</ol>
+<p>The probability that two independent events occur is the <em>multiplication rule</em>, assuming independence i.e. one event is not affected by another event. So if a flight is on time 85% of the time, then the probability it is on time this week <em>and</em> next week is 0.85 * 0.85.</p>
+<p>Note that “happening <em>at least once</em>” is the <em>complement</em> of “not happening at all”. Finding the probability of “not happening at all” is much easier and is normally used as a reverse way of finding “happening at least once”.</p>
+<p>See the “shared birthday” example above.</p>
+<div id="conditional-probability" class="section level2">
+<h2><span class="header-section-number">7.1</span> Conditional probability</h2>
+<p>Conditional probability is the probability of an event given a prior condition. E.g. the probability that a child will want to succeed in sports rather than in schoolwork or popularity <em>given</em> that they are a girl.</p>
+<p>Let’s assume there are 251 girls in a survey and 30 of them want to succeed most in sports rather than in school work or being popular.</p>
+<p>Let’s assume also that there are 227 boys in the survey too, whih means total number of kids is 478.</p>
+<p>This is written as P(sports|girl) = 30/251 = 0.12</p>
+<p>And this is spoken as: <em>The probability of “succeed at sports” given “being a girl”</em></p>
+<p>Or P(B|A)</p>
+<p>This can be calculated this way.</p>
+<p><span class="math inline">\(P(B|A) = \frac{P (A and B)}{P(A)}\)</span></p>
+<p>So 30 students are both girls and want to succeed at sports out of 478 students. Girls make up 251 out of 478 students.</p>
+<p><span class="math inline">\(P(sports|girls) = \frac{30/478}{251/478} = 30/251 = 0.12\)</span></p>
+<p>Let’s turn it <em>round the other way</em>. There are 91 girls that said that they most want to succeed in being popular, plus 50 boys =141 kids said they wanted most to be popular. If we take all the kids that said they wanted most to be popular, what is the chance that one of these kids will be a girl?</p>
+<p><span class="math inline">\(P(girl|popular) = \frac{91/478}{141/478} = 91/141 = 0.65\)</span></p>
+<p>So we can write the following for the conditional probability rule</p>
+<p>P(A and B) = P(A) x P(B|A)</p>
+<p>and the reverse:</p>
+<p>P(A and B) = P(B) x P(A|B)</p>
+</div>
+<div id="independence" class="section level2">
+<h2><span class="header-section-number">7.2</span> Independence</h2>
+<p>We can write a formula to describe independence, and that is that the Probability of “B” given “A” is the same sa the probability of B.</p>
+<p>P(B|A)=P(B)</p>
+<p>So when events are independent, both the following formulas are true: P(A and B) = P(A) x P(B|A) P(A and B) = P(A) x P(B)</p>
+<p>So, is one event independent of another? Let’s see whether doing well in schoolwork (good grades) is the most important thing to succeed at is dependent on gender.</p>
+<p>To test this we want to know whether:</p>
+<p>P(grades|girl) = P(grades)</p>
+<p>130/ 251 = 0.52 = 247/478 = 0.52</p>
+<p>In this instance, 130 out of 251 girls thought schoolwork was the most important thing to succeed at, compared to 247 boys and girls out of a total of 478 students. It turns out the probabilities are the same, so we can assume that gender does not influence this.</p>
+<p>However, thinking that it is most important to succeed at sports or be popular <em>does</em> seem to be dependent on gender and is not independent:</p>
+<p>P(sports) = 90/478 = 18.8% P(sports|boy) = 60/227 = 26.4%</p>
+</div>
+<div id="independence-is-not-disjoint" class="section level2">
+<h2><span class="header-section-number">7.3</span> Independence IS NOT Disjoint</h2>
+<p>Independence should not be confused with something being disjoint. Disjoint means multually exclusive, there are no outcomes in common so if one occurs, the other doesn’t. Do not use the multiplication rule on Disjoint events, use the addition rule as appropriate.</p>
+</div>
+<div id="picturing-probability" class="section level2">
+<h2><span class="header-section-number">7.4</span> Picturing probability</h2>
+<p>Tables or Venn diagrams? Which is easier to read?</p>
+<div class="figure">
+<img src="images/TableVenn.png" alt="Venn diagram - intersect." />
+<p class="caption">Venn diagram - intersect.</p>
+</div>
+<p>Test some of the formulas:</p>
+<p>let P(A) = Facebook yes = 0.6 let P(B) = Twitter yes = 0.2</p>
+<p>P(A and B) = 0.15 (Twitter yes <em>and</em> Facebook yes)</p>
+<p>Is using Twitter and Facebook mutually exclusive?</p>
+<p>Disjoint events cannot happen at the same time so if they are disjoint then P(A and B) would be zero. But P(A and B) = 0.15 so <em>no, they events are not mutually exclusive and not disjoint</em> (this is seen visually by the overlap of the circles).</p>
+<p>Are using Facebook and using Twitter independent?</p>
+<p>Does using Facebook <em>Change</em> the probability of using Twitter?</p>
+<p>i.e. does P(B|A) = P(B) ?</p>
+<p><span class="math inline">\(P(B|A) = \frac{P (A and B)}{P(A)}\)</span> = <span class="math inline">\(P(B|A) = \frac{P (0.15)}{P(0.6)}\)</span> = 25%</p>
+<p>P(B) = 20%</p>
+<p>P(B|A) NOT EQUAL TO P(B) therefore <em>NOT INDEPENDENT</em></p>
+</div>
+<div id="probability-tree" class="section level2">
+<h2><span class="header-section-number">7.5</span> Probability tree</h2>
+<p>In the example below, what is the probability that a driver who was seriously injured was NOT wearing a seatbelt?</p>
+<div class="figure">
+<img src="images/ProbTree.png" alt="Venn diagram - intersect." />
+<p class="caption">Venn diagram - intersect.</p>
+</div>
+<p>we want to know P(NB|I)</p>
+<p>= P(NB and I) / P(I) = 0.085 / (0.061 + 0.085) = 0.085/0.146 = 0.582</p>
+<p>So even though drivers not wearing a seatbelt are only 23% of those involved in accidents, they account for 58% of the injuries.</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

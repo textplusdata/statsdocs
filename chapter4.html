@@ -16,7 +16,7 @@
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -103,33 +103,33 @@ summary {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 51px;
+  padding-top: 45px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 50px;
+  margin-top: -50px;
 }
 .section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 50px;
+  margin-top: -50px;
 }
 .section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 50px;
+  margin-top: -50px;
 }
 .section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 50px;
+  margin-top: -50px;
 }
 .section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 50px;
+  margin-top: -50px;
 }
 .section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 50px;
+  margin-top: -50px;
 }
 .dropdown-submenu {
   position: relative;
@@ -267,7 +267,7 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">My Website</a>
+      <a class="navbar-brand" href="index.html">Stats Documents</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -303,6 +303,21 @@ $(document).ready(function () {
     <li>
       <a href="chapter6.html">Chapter 6</a>
     </li>
+    <li>
+      <a href="chapter7.html">Chapter 7</a>
+    </li>
+    <li>
+      <a href="chapter8.html">Chapter 8</a>
+    </li>
+    <li>
+      <a href="chapter10.html">Chapter 10, 11, 12, 13, 14</a>
+    </li>
+    <li>
+      <a href="chapter15.html">Chapter 15</a>
+    </li>
+    <li>
+      <a href="chapterX.html">Chapter XXX</a>
+    </li>
     <li class="divider"></li>
     <li class="dropdown-header">Notes about using R</li>
     <li>
@@ -310,6 +325,12 @@ $(document).ready(function () {
     </li>
     <li>
       <a href="other-notes.html">Other notes</a>
+    </li>
+    <li>
+      <a href="packages.html">Packages</a>
+    </li>
+    <li>
+      <a href="maths-symbols.html">Maths symbols</a>
     </li>
   </ul>
 </li>
@@ -413,16 +434,8 @@ summary(forest.df)</code></pre>
 # note used the &quot;AND&quot; logical operator
 
 
-library(dplyr)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code>summer.df &lt;- select(filter(forest.df, Month &gt;=4 &amp; Month &lt;=9),c(Month,Avg.Wind..mph.,Date))
+#library(dplyr) - don&#39;t need dplyr?
+summer.df &lt;- select(filter(forest.df, Month &gt;=4 &amp; Month &lt;=9),c(Month,Avg.Wind..mph.,Date))
 
 summary(summer.df)</code></pre>
 <pre><code>##      Month       Avg.Wind..mph.      Date          
@@ -482,6 +495,65 @@ ggplot(forest.df, aes(x = Day.of.Year, y = Avg.Wind..mph.)) + geom_point() + geo
 <p>When data is significantly skewed, it can be hard to say anything useful about the data.</p>
 <p>One option is to <em>Re-express</em> or <em>transform</em> the data through using logarithms (or square root).</p>
 <p>By applying a logarithm to data, you can normally make it more symmetrical. This may help give a better picture of the outliers. Note that if a data point is still an outlier <em>AFTER</em> applying logarithm then that is a <em>serious</em> outlier!</p>
+<p>Applying a log to the Hopkins forest data.</p>
+<pre class="r"><code>logforest.df &lt;- log10(forest.df$Avg.Wind..mph)
+
+boxplot(logforest.df)</code></pre>
+<pre><code>## Warning in bplt(at[i], wid = width[i], stats = z$stats[, i], out =
+## z$out[z$group == : Outlier (-Inf) in boxplot 1 is not drawn</code></pre>
+<p><img src="chapter4_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Run again without outliers:</p>
+<pre class="r"><code>boxplot(logforest.df,outline=FALSE)</code></pre>
+<p><img src="chapter4_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>To be honest, not completely sure what I’m doing here…</p>
+</div>
+<div id="chapter-4-questions" class="section level2">
+<h2>Chapter 4 questions</h2>
+<div id="slalom-times" class="section level3">
+<h3>18) Slalom times</h3>
+<p>The data is unimodal and positively skewed. Fördelningen är unimodal och snett fördelad åt höger.</p>
+<p>There are some extremely slow times that make use of the Mean and Standard Deviation inappropriate in this situation, a better analysis would use the Media and IQR. The median is approximately 165 seconds and the IQR is approximately 18 (178 - 160)</p>
+</div>
+<div id="camp-sites" class="section level3">
+<h3>22) Camp sites</h3>
+<p>As the data is heavily skewed to the right, I would describe this data using Median and IQR. The median number of camp sites per park is 43,5 and the IQR is 50 (78-28).</p>
+<p>Boxplot (oversimplifed, there are actually data points over 78 and under 28)</p>
+<pre class="r"><code>camp.df &lt;- data.frame(sites = c(0,28,43.5,78,275))
+
+boxplot(camp.df)</code></pre>
+<p><img src="chapter4_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+<div id="question-31-test-scores" class="section level3">
+<h3>Question 31) Test scores</h3>
+<p>Class 1 is boxplot A since the only real difference between Boxplot A and B is the IQR, which is much larger for boxplot B, which would indicate a much flatter spread of data.</p>
+<p>Class 2 is boxplot B</p>
+<p>Class 3 is boxplot C since the data is skewed left, reflected in the inbalanced IQR and the higher median value.</p>
+</div>
+<div id="challenge---coffee-cup-analysis" class="section level3">
+<h3>Challenge - coffee cup analysis</h3>
+<pre class="r"><code> library(readxl)
+Ch04_Mugs &lt;- read_excel(&quot;data/Ch04_Mugs.xls&quot;)</code></pre>
+<p>To begin with, the data will be analysed using a histogram:</p>
+<pre class="r"><code>hist(Ch04_Mugs$Difference)</code></pre>
+<p><img src="chapter4_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Then the five-number summary will be computed:</p>
+<pre class="r"><code>summary(Ch04_Mugs)</code></pre>
+<pre><code>##    Difference      Container        
+##  Min.   : 0.000   Length:32         
+##  1st Qu.: 6.000   Class :character  
+##  Median : 8.000   Mode  :character  
+##  Mean   : 9.812                     
+##  3rd Qu.:13.625                     
+##  Max.   :24.500</code></pre>
+<p>The data is skewed to the right, with a median value of 8 degrees Farenheit and an IQR of 13.625 - 6 = 7.6 degrees.</p>
+<p>Using a boxplot, we can identify if there are any outliers:</p>
+<pre class="r"><code>boxplot(Ch04_Mugs$Difference)</code></pre>
+<p><img src="chapter4_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>There are no outliers, but there are a large number of data points that are greater than the median. To help understand what may be causing this, we can make a new boxplot, this time grouped by the cup type.</p>
+<pre class="r"><code>boxplot(Ch04_Mugs$Difference ~ Ch04_Mugs$Container)</code></pre>
+<p><img src="chapter4_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>Now we can clearly see that the Nissan cups perform the best (the smallest temperature difference) while SIGG perform the worst. Looking at the Q3 line for Nissan we can see that this is below the minimum temperature difference recorded for all the other cups.</p>
+</div>
 </div>
 </div>
 

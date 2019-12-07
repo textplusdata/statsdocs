@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Chapter 5</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 45px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h2 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h3 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h4 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h5 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h6 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Stats Documents</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Contents
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Stats Data and Models</li>
+    <li>
+      <a href="chapter1.html">Chapter 1</a>
+    </li>
+    <li>
+      <a href="chapter2.html">Chapter 2</a>
+    </li>
+    <li>
+      <a href="chapter3.html">Chapter 3</a>
+    </li>
+    <li>
+      <a href="chapter4.html">Chapter 4</a>
+    </li>
+    <li>
+      <a href="chapter5.html">Chapter 5</a>
+    </li>
+    <li>
+      <a href="chapter6.html">Chapter 6</a>
+    </li>
+    <li>
+      <a href="chapter7.html">Chapter 7</a>
+    </li>
+    <li>
+      <a href="chapter8.html">Chapter 8</a>
+    </li>
+    <li>
+      <a href="chapter10.html">Chapter 10, 11, 12, 13, 14</a>
+    </li>
+    <li>
+      <a href="chapter15.html">Chapter 15</a>
+    </li>
+    <li>
+      <a href="chapterX.html">Chapter XXX</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Notes about using R</li>
+    <li>
+      <a href="using-rmarkdown.html">Using R Markdown</a>
+    </li>
+    <li>
+      <a href="other-notes.html">Other notes</a>
+    </li>
+    <li>
+      <a href="packages.html">Packages</a>
+    </li>
+    <li>
+      <a href="maths-symbols.html">Maths symbols</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Chapter 5</h1>
+
+</div>
+
+
+<div id="the-standard-deviation-as-a-ruler-and-the-normal-model" class="section level1">
+<h1>The Standard Deviation as a Ruler and the Normal Model</h1>
+<p>Standard Deviation measurement gives us a consistent measure for comparing completely different things e.g. long jump distances versus 200m sprints.</p>
+<div id="standardising-with-z-scores" class="section level2">
+<h2>Standardising with Z scores</h2>
+<p>Measuring the distance from the mean in terms of standard deviations give a relative measurement that can standardise data analysis.</p>
+<p>To standardise the value, take the data point, subtract the mean from it and then divide it by the standard deviation. If the data point is close to the mean, the standardised value will be small, the further away from the mean the larger the value.</p>
+<p>This is called the z score. So <em>z-score</em> is just another way of saying <em>standardised value</em></p>
+<p>$ z =  s$</p>
+<p>If the z-score is 2.1 then the value is 2.1 standard deviations <em>above</em> the mean. If the z-score is -0.9 then the value is 0.9 standard deviations <em>below</em> the mean.</p>
+<p>Be careful about positive and negative z-scores, since sometimes negative is better e.g. faster time in race and sometimes positive is better e.g. weight of barbell lifted.</p>
+<p>Example:</p>
+<p>Bode Miller “super combined” winter olympics 2010.</p>
+<p>Slalom: Mean = 52.67 seconds; standard deviation =1.614 Downhill: Mean = 116.26 seconds, s = 1.914</p>
+<p>Bode: Slalom = 51.01 seconds Downhill = 113.91</p>
+<p>Which time was more impressive?</p>
+<p>Z Slalom = 51.01 - 52.67 / 1.614</p>
+<pre class="r"><code>cat(&quot;Slalom z-score = &quot;,(51.01 -52.67)/1.614,&quot;\n&quot;)</code></pre>
+<pre><code>## Slalom z-score =  -1.028501</code></pre>
+<pre class="r"><code>cat(&quot;Downhill z-score = &quot;,(113.91 - 116.26)/1.914,&quot;\n&quot;)</code></pre>
+<pre><code>## Downhill z-score =  -1.227795</code></pre>
+<p>The Downhill was more impressive since it was 1.2 deviations below the mean (and less time is better!).</p>
+</div>
+<div id="shifting-and-scaling" class="section level2">
+<h2>Shifting and scaling</h2>
+<p>If you subtract a constant from each data point (say you want to calculate how over/underweight people are, so you subtract the recommended weight from each person e.g. 74kg for men) then the Median and Mean will change, but the IQR will remain the same, as will the range, as will the standard deviation.</p>
+<div id="rescaling-to-adjust-the-scale" class="section level3">
+<h3>Rescaling to adjust the scale</h3>
+<p>If you do a conversion between kilograms and pounds, for example, then all the measures get multipled by the same amount - so the range will increase by 2.2, the IQR will increase by 2.2, Standard deviation &amp; the Mean will increase by 2.2.</p>
+</div>
+<div id="shifting-scaling-and-on-z-scores" class="section level3">
+<h3>Shifting, Scaling and on z-scores</h3>
+<p>When we standardise data, we delete the Mean from every value while calculating z-scores, we are basically resetting the Mean to zero.</p>
+<p>BEcause we are dividing by s, the standard deviation will also be divided by s which means the standard deviation becomes 1!</p>
+<p>So:</p>
+<ul>
+<li>Standardising in z-scores does not change the shape of the distribution of a variable</li>
+<li>Standardising in z-scores makes the mean zero (0)</li>
+<li>Standardising in z-scores makes the standard deviation 1</li>
+</ul>
+</div>
+<div id="example---sat-act-tests" class="section level3">
+<h3>Example - SAT / ACT tests</h3>
+<p>SAT test results: IQ1: 1530 IQ3: 1850 IQR = 1850 - 1530 = 320</p>
+<p>So to be in the top quarter she needs over 1850.</p>
+<p>Larger group: SAT mean is 1500 and standard deviation is 250.</p>
+<p>For the same group, ACT average is 20.8 with a standard deviation of 4.8.</p>
+<p>The z-score for SAT then is 1850 - 1500 / 250 = 350/250 = 1.4 so you need 1.4 standard deviations higher to get in.</p>
+<p>For ACT, what do we know? We know the standard deviation, the mean but not the target.</p>
+<p>so we need to know:</p>
+<p>for ACT, standard deviation is 4.8 and you need 1.4 s of this above the mean, = 6.72, so average of 20.8 + 6.72 points = 27.52</p>
+</div>
+</div>
+<div id="normal-models" class="section level2">
+<h2>Normal models</h2>
+<p>z-score = -1 -&gt; means the data point is one standard deviation BELOW the mean z-score = 1 -&gt; means the data point is one standard deviation ABOVE the mean</p>
+<p>As a rough guide, symmetrical data will have at around half of its cases (data points) will have z-scores of between -1 and 1 (compare that to the normla model where this is 68%)</p>
+<p>So if the z-score is 3, then we have something that is pretty rare while a z-score of 6 or more shouts out for specific attention.</p>
+<p>SO how do we know how big a z-score to expect? We can make a model of the data distribution. Models are simplified pictures of reality. They don’t show all the details, but enough to be able to make predictions, find anomolies etc. Without a model we have only the data we have collected, and can’t say anything more.</p>
+<p>“<em>Normal models</em>” are also known as “<em>Bell-shaped curves</em>”. These work for distributions that are unimodal and roughly symmetric.</p>
+<p>There is a “normal” model for every combination of mean and standard deviation. For Standard deviation we use lower-case “sigma” and for mean we use “mu”So:</p>
+<p>$ N(, ) $</p>
+<p>The numbers here are represetned by mu and sigma because they are <em>PARAMETERS</em> of the model and not actual numbers from data.</p>
+<p>So if data is modeled with a Normal model and then standardised, the z-score is is calculated as:</p>
+<p>$z =  $</p>
+<p>If the data is standardised first, then the Normal Model is simply:</p>
+<p>N(0,1)</p>
+<p>BUT <em>DO NOT USE A NORMAL MODEL</em> ON ANY DISTRIBUTION THAT IS <em>NOT NORMAL</em></p>
+<p>How do we check? We make a histogram which shows that the data is <em>unimodal</em> and <em>symmetrical</em></p>
+<div id="using-the-68-95-99.7-rule" class="section level3">
+<h3>Using the 68-95-99.7 rule</h3>
+<p>In the normal model, roughly 68% of the data is found within +/- 1 standard deviation, rouhgly 95% is found within +/- 2 standard deviations and 99.7% is found within +/- 3 standard deviations.</p>
+<p>All rules together (note - to get the lines straight, needed a large sample size):</p>
+<pre class="r"><code># Demo of Normal Distribution
+
+mean=0; sd=1
+lb1=-1; ub1=1
+lb2=-2; ub2=2
+lb3=-3; ub3=3
+
+
+x &lt;- seq(-4,4,length=10000)*sd + mean
+hx &lt;- dnorm(x,mean,sd)
+
+plot(x, hx, type=&quot;n&quot;, xlab=&quot;Standard deviations&quot;, ylab=&quot;&quot;, axes=FALSE)
+
+# Note - separate out title as different code and set it so it moves to top-left corner
+title(&quot;Normal Distribution&quot;, adj = 0, line = 1)
+
+i &lt;- x &gt;= lb3 &amp; x &lt;= ub3
+lines(x, hx)
+polygon(c(lb3,x[i],ub3), c(0,hx[i],0), col=&quot;red&quot;)
+
+i &lt;- x &gt;= lb2 &amp; x &lt;= ub2
+lines(x, hx)
+polygon(c(lb2,x[i],ub2), c(0,hx[i],0), col=&quot;blue&quot;)
+
+i &lt;- x &gt;= lb1 &amp; x &lt;= ub1
+lines(x, hx)
+polygon(c(lb1,x[i],ub1), c(0,hx[i],0), col=&quot;green&quot;)
+
+
+
+area &lt;- pnorm(ub1, mean, sd) - pnorm(lb1, mean, sd)
+result1 &lt;- paste(&quot;P(&quot;,lb1,&quot;&lt; Mean &lt;&quot;,ub1,&quot;) =&quot;,
+   signif(area, digits=3))
+mtext(result1,3,adj = 0)
+
+area &lt;- pnorm(ub2, mean, sd) - pnorm(lb2, mean, sd)
+result2 &lt;- paste(&quot;P(&quot;,lb2,&quot;&lt; Mean &lt;&quot;,ub2,&quot;) =&quot;,
+   signif(area, digits=3))
+mtext(result2,3,adj = 0.5)
+
+area &lt;- pnorm(ub3, mean, sd) - pnorm(lb3, mean, sd)
+result3 &lt;- paste(&quot;P(&quot;,lb3,&quot;&lt; Mean &lt;&quot;,ub3,&quot;) =&quot;,
+   signif(area, digits=3))
+mtext(result3,3,adj = 1)
+
+axis(1, at=seq(-4, 4, 1), pos=0)</code></pre>
+<p><img src="chapter5_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>And here is how applied to “real-world” example of IQ</p>
+<pre class="r"><code>#example borrowed from here: https://www.statmethods.net/advgraphs/probability.html
+
+# Children&#39;s IQ scores are normally distributed with a
+# mean of 100 and a standard deviation of 15. What
+# proportion of children are expected to have an IQ between
+# 80 and 120?
+
+mean=100; sd=15
+lb=80; ub=120
+
+x &lt;- seq(-4,4,length=100)*sd + mean
+hx &lt;- dnorm(x,mean,sd)
+
+plot(x, hx, type=&quot;n&quot;, xlab=&quot;IQ Values&quot;, ylab=&quot;&quot;, axes=FALSE)
+# Note - separate out title as different code and set it so it moves to top-left corner
+title(&quot;Normal Distribution&quot;, adj = 0, line = 1)
+
+i &lt;- x &gt;= lb &amp; x &lt;= ub
+lines(x, hx)
+polygon(c(lb,x[i],ub), c(0,hx[i],0), col=&quot;red&quot;)
+
+area &lt;- pnorm(ub, mean, sd) - pnorm(lb, mean, sd)
+result &lt;- paste(&quot;P(&quot;,lb,&quot;&lt; IQ &lt;&quot;,ub,&quot;) =&quot;,
+   signif(area, digits=3))
+mtext(result,3)
+axis(1, at=seq(40, 160, 20), pos=0)</code></pre>
+<p><img src="chapter5_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="example" class="section level3">
+<h3>Example</h3>
+<p>A test that students take has a mean of 500 and standard deviation of 100 points. If I get a score of 600, how did I do?</p>
+<ol style="list-style-type: decimal">
+<li>Model the distribution using model N(500,100)</li>
+<li>The model will look like this:</li>
+</ol>
+<pre class="r"><code># Demo of Test results
+
+#Change the mean and the standard deviation to the numbers above
+mean=500; sd=100
+lb1=400; ub1=600
+lb2=300; ub2=700
+lb3=200; ub3=800
+
+
+x &lt;- seq(-4,4,length=100)*sd + mean
+hx &lt;- dnorm(x,mean,sd)
+
+plot(x, hx, type=&quot;n&quot;, xlab=&quot;Standard deviations&quot;, ylab=&quot;&quot;, axes=FALSE)
+
+# Note - separate out title as different code and set it so it moves to top-left corner
+title(&quot;Normal Distribution&quot;, adj = 0, line = 1)
+
+i &lt;- x &gt;= lb3 &amp; x &lt;= ub3
+lines(x, hx)
+polygon(c(lb3,x[i],ub3), c(0,hx[i],0), col=&quot;red&quot;)
+
+i &lt;- x &gt;= lb2 &amp; x &lt;= ub2
+lines(x, hx)
+polygon(c(lb2,x[i],ub2), c(0,hx[i],0), col=&quot;blue&quot;)
+
+i &lt;- x &gt;= lb1 &amp; x &lt;= ub1
+lines(x, hx)
+polygon(c(lb1,x[i],ub1), c(0,hx[i],0), col=&quot;green&quot;)
+
+
+
+area &lt;- pnorm(ub1, mean, sd) - pnorm(lb1, mean, sd)
+result1 &lt;- paste(&quot;P(&quot;,lb1,&quot;&lt; Mean &lt;&quot;,ub1,&quot;) =&quot;,
+   signif(area, digits=3))
+mtext(result1,3,adj = 0, line=-2)
+
+area &lt;- pnorm(ub2, mean, sd) - pnorm(lb2, mean, sd)
+result2 &lt;- paste(&quot;P(&quot;,lb2,&quot;&lt; Mean &lt;&quot;,ub2,&quot;) =&quot;,
+   signif(area, digits=3))
+mtext(result2,3,adj = 0.5, line = -1)
+
+area &lt;- pnorm(ub3, mean, sd) - pnorm(lb3, mean, sd)
+result3 &lt;- paste(&quot;P(&quot;,lb3,&quot;&lt; Mean &lt;&quot;,ub3,&quot;) =&quot;,
+   signif(area, digits=3))
+mtext(result3,3,adj = 1, line = 0)
+
+axis(1, at=seq(0, 1000, 100), pos=0)</code></pre>
+<p><img src="chapter5_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>We can see that the score of 600 is exactly one standard deviation away from the mean and that means that above 600 we have half of the cases that fall outside the standard deviation of +/- i.e. 100% - 68% / 2 =16% have a higher score than 600.</p>
+</div>
+</div>
+<div id="finding-normal-percentiles" class="section level2">
+<h2>Finding Normal Percentiles</h2>
+<p>What if the score was 675 instead of 600? How many students would score higher than 680? This is harder to say as it is more than one standard deviation away from the mean but less than two.</p>
+<p>Instead, we can use a lookup table (or formula in software) to find this out.</p>
+<p>Take the z-score and find out what percentile that is in.</p>
+<p>The z-score is 680 - 500 / 100 = 1.80</p>
+<p>And the corresponding percentile is 0.964 = 96.4% of scores are less than z-score of 1.8, so in top 3.6% of students!</p>
+</div>
+<div id="normal-probability-plot" class="section level2">
+<h2>Normal probability plot</h2>
+<p>These are used to find out whether you can use the Normal model or not when analysing the data.</p>
+<p>If the normal probability plot is straight, then it’s OK to use the normal model, if not then you can’t. Very skewed data will normally have data points that deviate from a straight line.</p>
+<p>So a normal probability plot takes the z-scores of the data and compares each one to same number of data points in a normal distribution i.e. the lowest z-score value in the data is compared to the expected lowest z-score in normal distribution.</p>
+<p>In the example below, we can see how closely the datapoints follow the line (randomly generated every time).</p>
+<pre class="r"><code># create sample data
+x &lt;- rt(100, df=3)
+
+# normal fit
+qqnorm(x); qqline(x)</code></pre>
+<p><img src="chapter5_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="questions" class="section level2">
+<h2>QUESTIONS</h2>
+<div id="q9.-normal-cattle" class="section level3">
+<h3>Q9. Normal cattle</h3>
+<p>Mean weight of Angus bulls = 1152 pounds. Thw weights of the animals can be described with a normal model with a standard deviation $$ of 84 pounds.</p>
+<p>What percent of bulls weight: a) over 1250 pounds b) under 1200 pounds c) between 1000 and 1100 pounds?</p>
+<p>Answer Think! Show! Tell!</p>
+<div id="think" class="section level4">
+<h4>Think!</h4>
+<p>Need to work out the z-scores for the different weights, and work out what percentile the weight falls into to then work out %</p>
+</div>
+<div id="plan" class="section level4">
+<h4>Plan</h4>
+<p>Z-score formula is $ $</p>
+<pre class="r"><code>mean=1152; sd=84
+
+zscoreA = (1250 - mean) / sd
+zscoreA</code></pre>
+<pre><code>## [1] 1.166667</code></pre>
+<pre class="r"><code>zscoreB = (1200 - mean) / sd
+zscoreB</code></pre>
+<pre><code>## [1] 0.5714286</code></pre>
+<pre class="r"><code>zscoreC1 = (1000 - mean) / sd
+zscoreC1</code></pre>
+<pre><code>## [1] -1.809524</code></pre>
+<pre class="r"><code>zscoreC2 = (1100 - mean) / sd
+zscoreC2</code></pre>
+<pre><code>## [1] -0.6190476</code></pre>
+<pre class="r"><code>#Then to get pnorm:
+
+cat(&quot;The percentage of bulls over 1250 pounds is: &quot;, 1 - pnorm(zscoreA),&quot;\n&quot;)</code></pre>
+<pre><code>## The percentage of bulls over 1250 pounds is:  0.1216725</code></pre>
+<pre class="r"><code>cat(&quot;The percentage of bulls under 1200 pounds is: &quot;, pnorm(zscoreB),&quot;\n&quot;)</code></pre>
+<pre><code>## The percentage of bulls under 1200 pounds is:  0.7161454</code></pre>
+<pre class="r"><code>cat(&quot;The percentage of bulls between 1000 and 1100 is: &quot;, pnorm(zscoreC2) - pnorm(zscoreC1),&quot;\n&quot;)</code></pre>
+<pre><code>## The percentage of bulls between 1000 and 1100 is:  0.2327577</code></pre>
+<p>Can do this graphically with Tigerstats. Firstly over 1250 pounds:</p>
+<pre class="r"><code># Or use the tigerstats package and the pnorm GC function
+
+library(tigerstats) </code></pre>
+<pre><code>## Loading required package: abd</code></pre>
+<pre><code>## Loading required package: nlme</code></pre>
+<pre><code>## 
+## Attaching package: &#39;nlme&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     collapse</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre><code>## Loading required package: grid</code></pre>
+<pre><code>## Loading required package: mosaic</code></pre>
+<pre><code>## Loading required package: ggformula</code></pre>
+<pre><code>## Loading required package: ggstance</code></pre>
+<pre><code>## 
+## Attaching package: &#39;ggstance&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:ggplot2&#39;:
+## 
+##     geom_errorbarh, GeomErrorbarh</code></pre>
+<pre><code>## 
+## New to ggformula?  Try the tutorials: 
+##  learnr::run_tutorial(&quot;introduction&quot;, package = &quot;ggformula&quot;)
+##  learnr::run_tutorial(&quot;refining&quot;, package = &quot;ggformula&quot;)</code></pre>
+<pre><code>## Loading required package: mosaicData</code></pre>
+<pre><code>## Loading required package: Matrix</code></pre>
+<pre><code>## Registered S3 method overwritten by &#39;mosaic&#39;:
+##   method                           from   
+##   fortify.SpatialPolygonsDataFrame ggplot2</code></pre>
+<pre><code>## 
+## The &#39;mosaic&#39; package masks several functions from core packages in order to add 
+## additional features.  The original behavior of these functions should not be affected by this.
+## 
+## Note: If you use the Matrix package, be sure to load it BEFORE loading mosaic.</code></pre>
+<pre><code>## 
+## Attaching package: &#39;mosaic&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:Matrix&#39;:
+## 
+##     mean</code></pre>
+<pre><code>## The following objects are masked from &#39;package:dplyr&#39;:
+## 
+##     count, do, tally</code></pre>
+<pre><code>## The following object is masked from &#39;package:ggplot2&#39;:
+## 
+##     stat</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     binom.test, cor, cor.test, cov, fivenum, IQR, median,
+##     prop.test, quantile, sd, t.test, var</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     max, mean, min, prod, range, sample, sum</code></pre>
+<pre><code>## Welcome to tigerstats!
+## To learn more about this package, consult its website:
+##  http://homerhanumat.github.io/tigerstats</code></pre>
+<pre><code>## 
+## Attaching package: &#39;tigerstats&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:reshape2&#39;:
+## 
+##     tips</code></pre>
+<pre class="r"><code>  pnormGC(1250, region=&quot;above&quot;, mean,
+        sd,graph=TRUE)</code></pre>
+<p><img src="chapter5_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre><code>## [1] 0.1216725</code></pre>
+<p>Then under 1200 pounds:</p>
+<pre class="r"><code># Or use the tigerstats package and the pnorm GC function
+
+library(tigerstats) 
+  pnormGC(1200, region=&quot;below&quot;, mean,
+        sd,graph=TRUE)</code></pre>
+<p><img src="chapter5_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre><code>## [1] 0.7161454</code></pre>
+<p>Between 1000 and 1100</p>
+<pre class="r"><code>pnormGC(c(1000,1100),region=&quot;between&quot;,mean,
+        sd,graph=TRUE)</code></pre>
+<p><img src="chapter5_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre><code>## [1] 0.2327577</code></pre>
+</div>
+</div>
+<div id="question-10---iqs-revisited" class="section level3">
+<h3>Question 10 - IQs revisited</h3>
+<p>Based on Normal model N(100,16) what percentage of scores would you expect to be:</p>
+<ol style="list-style-type: lower-alpha">
+<li>over 80</li>
+<li>under 90</li>
+<li>between 112 and 132</li>
+</ol>
+<pre class="r"><code>meanIQ = 100; sdIQ = 16
+
+zscoreIQa = (80 - meanIQ) / sdIQ
+
+cat(&quot;Percentage of students scoring OVER 80: &quot;, (1 - pnorm(zscoreIQa))*100,&quot;%&quot;, &quot;\n&quot;)</code></pre>
+<pre><code>## Percentage of students scoring OVER 80:  89.43502 %</code></pre>
+<pre class="r"><code>zscoreIQb = (90 - meanIQ) / sdIQ
+
+cat(&quot;Percentage of students scoring UNDER 90: &quot;, pnorm(zscoreIQb)*100, &quot;%&quot;, &quot;\n&quot;)</code></pre>
+<pre><code>## Percentage of students scoring UNDER 90:  26.59855 %</code></pre>
+<pre class="r"><code>zscoreIQc1 = (112 - meanIQ) / sdIQ
+zscoreIQc2 = (132 - meanIQ) / sdIQ
+
+cat(&quot;Percentage of students scoring BETWEEN 112 and 132: &quot;, (pnorm(zscoreIQc2) - pnorm(zscoreIQc1))*100,&quot;%&quot;, &quot;\n&quot;)</code></pre>
+<pre><code>## Percentage of students scoring BETWEEN 112 and 132:  20.38772 %</code></pre>
+</div>
+<div id="question-33---small-bull" class="section level3">
+<h3>Question 33 - Small bull</h3>
+<p>Back to previous question about bulls, what would be unusually small in the model N(1152,84)?</p>
+<p>Depends what is meant by “unusually small”. Assume that unusually small is 2 deviations below the mean and lower (ie. bottom 2.5% of all animals. Since the standard deviation is 84 pounds, that would be:</p>
+<pre class="r"><code>1152 - (84 * 2)</code></pre>
+<pre><code>## [1] 984</code></pre>
+</div>
+<div id="question-39" class="section level3">
+<h3>Question 39</h3>
+<p>Downhill skiers.</p>
+<p><a href="http://www.espn.com/olympics/winter/2010/results/_/sport/1/event/2" class="uri">http://www.espn.com/olympics/winter/2010/results/_/sport/1/event/2</a></p>
+<p>The data is as follows:</p>
+<pre class="r"><code>skiers.df &lt;- c(114.31, 114.38, 114.4, 114.52, 114.64, 114.67, 
+114.82, 114.84, 114.87, 114.88, 115.02, 115.19, 115.19, 115.26, 
+115.29, 115.4, 115.44, 115.49, 115.58, 115.71, 115.74, 115.81, 
+116.04, 116.11, 116.19, 116.2, 116.29, 116.35, 116.58, 116.66, 
+116.69, 116.69, 117.02, 117.19, 117.21, 117.44, 117.72, 117.91, 
+118.08, 118.43, 118.58, 118.71, 118.82, 118.85, 119.21, 119.52, 
+119.61, 119.65, 119.76, 119.8, 119.84, 119.99, 120.12, 120.58, 
+121.67, 121.72, 122.57, 123.36, 124.44)
+
+
+summary(skiers.df)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   114.3   115.3   116.7   117.3   119.0   124.4</code></pre>
+<ol style="list-style-type: lower-alpha">
+<li>mean is 117.34 seconds, standard deviation = 2.465 seconds. What percentage of times are below 114.875?</li>
+</ol>
+<pre class="r"><code># First calculate the z-score for 114.875 using model N(117.34, 2.465)
+
+
+SkiMean = 117.34; SkiSD = 2.465
+
+zSkiers &lt;- (114.875 - SkiMean) / SkiSD
+zSkiers</code></pre>
+<pre><code>## [1] -1</code></pre>
+<pre class="r"><code>cat (&quot;The percentile of the zscore is: &quot;, pnorm(-1)*100,&quot;%&quot;)</code></pre>
+<pre><code>## The percentile of the zscore is:  15.86553 %</code></pre>
+<pre class="r"><code>library(tigerstats) 
+  pnormGC(114.875, region=&quot;below&quot;, SkiMean,
+        SkiSD,graph=TRUE)</code></pre>
+<p><img src="chapter5_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<pre><code>## [1] 0.1586553</code></pre>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>What is the actual percent of times below 114.875?</li>
+</ol>
+<pre class="r"><code># We can just count the rows that are less than 114.875 and work out the percentage of all the 59 cases.
+# Checking manually is 9 rows
+# Using R, we can use this formula. Note that the &quot;Sum&quot; is summing the number of rows NOT the values
+
+sum(skiers.df &lt;114.875)</code></pre>
+<pre><code>## [1] 9</code></pre>
+<pre class="r"><code>cat(&quot;The percentage of skiers below 114.875 is: &quot;,(sum(skiers.df &lt;114.875) /59)*100,&quot;%&quot; )</code></pre>
+<pre><code>## The percentage of skiers below 114.875 is:  15.25424 %</code></pre>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>The two percentages don’t agree because we have used a model and this doesn’t take into account the actual number of cases and is making standardised assumptions. The data is not perfectly symmetrical as the normal model is. If it was 15.87% it would be 9.36 people, which is impossible.</li>
+</ol>
+<p>NOTE - the book is wrong! It is assuming only 8 people went faster that 114.875, but according to the data it is 9! Furthermore, the data it presents is rounded compared to the source data they provide the link to so there is no way of getting the correct number to this question!</p>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>When making a histogram, we note that the data is not symmetrical and we shouldn’t have used the normal model to analyse the data. The data is fairly heavily skewed to the right.</li>
+</ol>
+<pre class="r"><code>hist(skiers.df, breaks = 20)</code></pre>
+<p><img src="chapter5_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
