@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Chapter 17</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 45px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h2 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h3 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h4 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h5 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h6 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Stats Documents</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Contents
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Stats Data and Models</li>
+    <li>
+      <a href="chapter1.html">Chapter 1</a>
+    </li>
+    <li>
+      <a href="chapter2.html">Chapter 2</a>
+    </li>
+    <li>
+      <a href="chapter3.html">Chapter 3</a>
+    </li>
+    <li>
+      <a href="chapter4.html">Chapter 4</a>
+    </li>
+    <li>
+      <a href="chapter5.html">Chapter 5</a>
+    </li>
+    <li>
+      <a href="chapter6.html">Chapter 6</a>
+    </li>
+    <li>
+      <a href="chapter7.html">Chapter 7</a>
+    </li>
+    <li>
+      <a href="chapter8.html">Chapter 8</a>
+    </li>
+    <li>
+      <a href="chapter10.html">Chapter 10, 11, 12, 13, 14</a>
+    </li>
+    <li>
+      <a href="chapter15.html">Chapter 15</a>
+    </li>
+    <li>
+      <a href="chapter17.html">Chapter 17</a>
+    </li>
+    <li>
+      <a href="chapterX.html">Chapter XXX</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Notes about using R</li>
+    <li>
+      <a href="using-rmarkdown.html">Using R Markdown</a>
+    </li>
+    <li>
+      <a href="other-notes.html">Other notes</a>
+    </li>
+    <li>
+      <a href="packages.html">Packages</a>
+    </li>
+    <li>
+      <a href="maths-symbols.html">Maths symbols</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Chapter 17</h1>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#sampling-distribution-models"><span class="toc-section-number">0.1</span> Sampling distribution models</a><ul>
+<li><a href="#when-does-the-normal-model-work"><span class="toc-section-number">0.1.1</span> When does the normal model work?</a></li>
+<li><a href="#sampling-distributions-of-other-staistics"><span class="toc-section-number">0.1.2</span> Sampling distributions of other staistics</a></li>
+<li><a href="#central-limit-theorum-clt"><span class="toc-section-number">0.1.3</span> Central Limit Theorum (CLT)</a></li>
+<li><a href="#exercise---coin-tossing"><span class="toc-section-number">0.1.4</span> Exercise - coin tossing</a></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="sampling-distribution-models" class="section level2">
+<h2><span class="header-section-number">0.1</span> Sampling distribution models</h2>
+<p>It is possible to simulate possible samples from a population. This will help us to determine the likelihood that the value of <span class="math inline">\(\hat{p}\)</span> is the same as P.</p>
+<p>The “sampling distribution” can be presented as a histogram of all the different samples that can be taken from a population.</p>
+<p>The “normal model” can be used to model the sampling distribution, which helps us to identify where the population parameter is based on statistics from our samples.</p>
+<p>The model can be described as follows:</p>
+<p>N(p, <span class="math inline">\(\sqrt{pq/n}\)</span>)</p>
+<p>If a survey of 2000 people reports that 57% of people think climate change is predominately man-made, then the standard distribution is as follows:</p>
+<p>SD(<span class="math inline">\(\hat{p}\)</span>) = <span class="math inline">\(\sqrt{pq/n}\)</span> =<span class="math inline">\(\sqrt{0.57 * 0.43/2000}\)</span></p>
+<p>= 0.011 = standard deviation of 1.1 percentage points (not 1.1%)</p>
+<p>So the model is N(0.57, 0.011)</p>
+<div id="when-does-the-normal-model-work" class="section level3">
+<h3><span class="header-section-number">0.1.1</span> When does the normal model work?</h3>
+<ul>
+<li>We need to have at least 10 potential successes and 10 potential failures in the data</li>
+<li>Sample should be maximum 10% of the total population</li>
+<li>Randomised Condition - the cases are selected randomly</li>
+<li>Independence Assumption - individuals must be independent of each other</li>
+</ul>
+<p>The variation between the different samples that can be made is called “sampling error” but a better term would be “sampling variation” since “error” is pejorative.</p>
+<p>Sampling models tell us how much variation we should expect and therefore how certain we can be about a statistic from a sample.</p>
+</div>
+<div id="sampling-distributions-of-other-staistics" class="section level3">
+<h3><span class="header-section-number">0.1.2</span> Sampling distributions of other staistics</h3>
+<p>We can also produce histograms of other statistics e.g.</p>
+<ul>
+<li>medians</li>
+<li>variances</li>
+<li>minimums</li>
+<li>means</li>
+</ul>
+<p>They will not always result in a normal model.</p>
+</div>
+<div id="central-limit-theorum-clt" class="section level3">
+<h3><span class="header-section-number">0.1.3</span> Central Limit Theorum (CLT)</h3>
+<p>The sampling distribution of any mean becomes <em>more</em> nearly normal as the sample size grows.</p>
+<p>… And this is true of any population, even from a skewed or bimodal population.</p>
+<p>CEO compensation example:</p>
+<p>Data summary of CEO salaries from 2012.</p>
+<pre class="r"><code>summary(CEO)</code></pre>
+<pre><code>##       Rank                     Name                       Company   
+##  Min.   :  1.0   A Greig Woodring:  1   3M                    :  1  
+##  1st Qu.:125.8   Ajay S Banga    :  1   Abbott Laboratories   :  1  
+##  Median :250.5   Alain Monie     :  1   Adobe Systems         :  1  
+##  Mean   :250.5   Alan B Miller   :  1   Advance Auto Parts    :  1  
+##  3rd Qu.:375.2   Alan D Wilson   :  1   Advanced Micro Devices:  1  
+##  Max.   :498.0   Alan R Mulally  :  1   AES                   :  1  
+##                  (Other)         :494   (Other)               :494  
+##  OneYearPay_MDollars FiveYearPay_MDollars Shares_MDollars   
+##  Min.   :  0.000     Min.   :  0.003      Min.   :    0.00  
+##  1st Qu.:  3.885     1st Qu.: 20.901      1st Qu.:    6.38  
+##  Median :  6.968     Median : 33.733      Median :   16.55  
+##  Mean   : 10.476     Mean   : 50.755      Mean   :  411.18  
+##  3rd Qu.: 13.361     3rd Qu.: 62.590      3rd Qu.:   36.85  
+##  Max.   :131.190     Max.   :903.210      Max.   :44486.80  
+##                      NA&#39;s   :129                            
+##       Age          Efficiency         LogPay     
+##  Min.   :32.00   Min.   :  1.00   Min.   :5.204  
+##  1st Qu.:53.00   1st Qu.: 52.25   1st Qu.:6.592  
+##  Median :57.00   Median :103.00   Median :6.843  
+##  Mean   :56.98   Mean   :103.31   Mean   :6.844  
+##  3rd Qu.:61.00   3rd Qu.:154.50   3rd Qu.:7.126  
+##  Max.   :84.00   Max.   :206.00   Max.   :8.118  
+##                  NA&#39;s   :294      NA&#39;s   :3</code></pre>
+<p>The summary shows that the Mean pay (for one year) is 10.4 million USD.</p>
+<pre class="r"><code>hist(CEO$OneYearPay_MDollars)</code></pre>
+<p><img src="chapter17_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Then we can run samples of size 10, and we end up with a less-skewed graph of all the means from the samples:</p>
+<pre class="r"><code>CEOsalary &lt;- CEO$OneYearPay_MDollars
+
+# sample size is 10, we are going to take 1000 samples
+
+CEO_salary &lt;- CEO$OneYearPay_MDollars
+SampleSize &lt;- 10
+SampleNumber &lt;- 1000
+
+sample_means &lt;- rep(NA, SampleNumber)
+
+for(i in 1:SampleNumber){
+   samp &lt;- sample(CEO_salary, SampleSize)
+   sample_means[i] &lt;- mean(samp)
+   }
+
+hist(sample_means)</code></pre>
+<p><img src="chapter17_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>The means are grouping around the population mean of 10 million USD.</p>
+<p>Let’s run the experiment again, but this time with samples of 50:</p>
+<pre class="r"><code>CEOsalary &lt;- CEO$OneYearPay_MDollars
+
+# sample size is 10, we are going to take 1000 samples
+
+CEO_salary &lt;- CEO$OneYearPay_MDollars
+SampleSize &lt;- 50
+SampleNumber &lt;- 1000
+
+sample_means50 &lt;- rep(NA, SampleNumber)
+
+for(i in 1:SampleNumber){
+   samp &lt;- sample(CEO_salary, SampleSize)
+   sample_means50[i] &lt;- mean(samp)
+   }
+
+hist(sample_means50)</code></pre>
+<p><img src="chapter17_files/figure-html/unnamed-chunk-5-1.png" width="672" /> And once more, but this time with samples of 200:</p>
+<pre class="r"><code>CEOsalary &lt;- CEO$OneYearPay_MDollars
+
+# sample size is 10, we are going to take 1000 samples
+
+CEO_salary &lt;- CEO$OneYearPay_MDollars
+SampleSize &lt;- 200
+SampleNumber &lt;- 1000
+
+sample_means200 &lt;- rep(NA, SampleNumber)
+
+for(i in 1:SampleNumber){
+   samp &lt;- sample(CEO_salary, SampleSize)
+   sample_means200[i] &lt;- mean(samp)
+   }
+
+hist(sample_means200, breaks =20)</code></pre>
+<p><img src="chapter17_files/figure-html/unnamed-chunk-6-1.png" width="672" /> Now the shape of the distribution is much more “normal”, with the means centering around the population mean of 10.4</p>
+<p>The CLT requires the following conditions to work: - Independence Assumption - Sample Size Condtion: As seen in the above example, the sample size had to be increased to around 200 before the normal model was reached. However, the population size is only 494, so in this instance we have to take a lot of samples because the data was so skewed in the first place.</p>
+<p>Because Means have smaller standard deviations than individuals (you might be surprised if someone in your class was 6’9" tall, but you would be really surprised if the mean of your class was 6’9" since this is extremely unlikely).</p>
+<p>So the larger the sample, the more the standard deviation is reduced, but only by the <em>SQUARE ROOT</em> of the number of cases.</p>
+<p>SD(<span class="math inline">\(\overline{y}\)</span>) = <span class="math inline">\(\sigma\)</span>/<span class="math inline">\(\sqrt{n}\)</span></p>
+<p>So we use SD(<span class="math inline">\(\overline{y}\)</span>) for <em>QUANTITATIVE</em> data and SD(<span class="math inline">\(\hat{p}\)</span>) for <em>CATEGORICAL</em> data (an “either/or” investigation e.g. % of people that belive in God).</p>
+</div>
+<div id="exercise---coin-tossing" class="section level3">
+<h3><span class="header-section-number">0.1.4</span> Exercise - coin tossing</h3>
+<p>Demonstrating the effect of different sample sizes for coin tossing experiment.</p>
+<p>In question 19, Chapter 17, each student in a class tosses a coin 25 times.</p>
+<pre class="r"><code># Let heads = 1 and Tails = 0
+
+# Create a function to flip the coins.
+# The mean of the dataframe will be the % heads.
+n = 25
+
+Flip1Coin = function(n) sample(c(1, 0), n, rep = T)
+CoinResult &lt;- Flip1Coin(n)
+
+
+mean(CoinResult)</code></pre>
+<pre><code>## [1] 0.52</code></pre>
+<p>Now we can get the means from repeating the experiment for the number of students in the class. Let’s say there are 30 students.</p>
+<pre class="r"><code># experiment is run by n number of students
+# they flip the coin n times
+
+StudentNumber &lt;- 30
+FlipNumber &lt;- 25
+Flip1Coin = function(FlipNumber) sample(c(1, 0), FlipNumber, rep = T)
+
+ExperimentResults &lt;- rep(NA, StudentNumber)
+
+
+for(i in 1:StudentNumber){
+  CoinResult &lt;- Flip1Coin(FlipNumber)
+  # mean(CoinResult)
+   ExperimentResults[i] &lt;- mean(CoinResult)
+   }
+
+hist(ExperimentResults)</code></pre>
+<p><img src="chapter17_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r"><code>mean(ExperimentResults)</code></pre>
+<pre><code>## [1] 0.4933333</code></pre>
+<pre class="r"><code>sd(ExperimentResults)</code></pre>
+<pre><code>## [1] 0.1152309</code></pre>
+<p>The histogram above centers around 0.4 to 0.6. If we increase the number of coin tosses to 64 then it looks like this, following the CLT:</p>
+<pre class="r"><code># experiment is run by n number of students
+# they flip the coin n times
+
+StudentNumber &lt;- 30
+FlipNumber &lt;- 64
+Flip1Coin = function(FlipNumber) sample(c(1, 0), FlipNumber, rep = T)
+
+ExperimentResults &lt;- rep(NA, StudentNumber)
+
+
+for(i in 1:StudentNumber){
+  CoinResult &lt;- Flip1Coin(FlipNumber)
+  # mean(CoinResult)
+   ExperimentResults[i] &lt;- mean(CoinResult)
+   }
+
+hist(ExperimentResults)</code></pre>
+<p><img src="chapter17_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="r"><code>mean(ExperimentResults)</code></pre>
+<pre><code>## [1] 0.5046875</code></pre>
+<pre class="r"><code>sd(ExperimentResults)</code></pre>
+<pre><code>## [1] 0.08299985</code></pre>
+<p>We can also experiment with the 25 flips, but carried out by more students (let’s say 100):</p>
+<pre class="r"><code># experiment is run by n number of students
+# they flip the coin n times
+
+StudentNumber &lt;- 100
+FlipNumber &lt;- 25
+Flip1Coin = function(FlipNumber) sample(c(1, 0), FlipNumber, rep = T)
+
+ExperimentResults &lt;- rep(NA, StudentNumber)
+
+
+for(i in 1:StudentNumber){
+  CoinResult &lt;- Flip1Coin(FlipNumber)
+  # mean(CoinResult)
+   ExperimentResults[i] &lt;- mean(CoinResult)
+   }
+
+hist(ExperimentResults)</code></pre>
+<p><img src="chapter17_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre class="r"><code>mean(ExperimentResults)</code></pre>
+<pre><code>## [1] 0.5112</code></pre>
+<pre class="r"><code>sd(ExperimentResults)</code></pre>
+<pre><code>## [1] 0.08726229</code></pre>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
